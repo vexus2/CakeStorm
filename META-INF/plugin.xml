@@ -52,35 +52,35 @@
           <add-to-group anchor="last" group-id="ToolsMenu"/>
           <action id="CakeStorm.JumpToController" class="com.vexus2.cakestorm.ide.Actions$JumpToController"
                   text="Jump to Controller from TestCase." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="c"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="c"/>-->
           </action>
           <action id="CakeStorm.JumpToModel" class="com.vexus2.cakestorm.ide.Actions$JumpToModel"
                   text="Jump to Model from Controller / Fixture / ModelTestCase." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="m"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="m"/>-->
           </action>
           <action id="CakeStorm.JumpToView" class="com.vexus2.cakestorm.ide.Actions$JumpToView"
                   text="Jump to View from Controller in Action." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="v"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="v"/>-->
           </action>
           <action id="CakeStorm.JumpToComponent" class="com.vexus2.cakestorm.ide.Actions$JumpToComponent"
                   text="Jump to Component from TestCase." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt p"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt p"/>-->
           </action>
           <action id="CakeStorm.JumpToBehavior" class="com.vexus2.cakestorm.ide.Actions$JumpToBehavior"
                   text="Jump to Behavior from TestCase." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt b"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt b"/>-->
           </action>
           <action id="CakeStorm.JumpToHelper" class="com.vexus2.cakestorm.ide.Actions$JumpToHelper"
                   text="Jump to Helper from TestCase." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt h"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt h"/>-->
           </action>
           <action id="CakeStorm.JumpToFixture" class="com.vexus2.cakestorm.ide.Actions$JumpToFixture"
                   text="Jump to Fixture from Model." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt f"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt f"/>-->
           </action>
           <action id="CakeStorm.JumpToTestCase" class="com.vexus2.cakestorm.ide.Actions$JumpToTestCase"
                   text="Jump to TestCase from Controller / Model." description="">
-              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt t"/>
+              <!--<keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt t"/>-->
           </action>
       </group>
   </actions>

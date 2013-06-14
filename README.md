@@ -17,4 +17,3 @@ Utility for CakePHP developers. Provides the ability to easily jump between file
 | Helper |C-c C-h| HelperTestCase |
 | Fixture |C-c C-f | Model |
 | Test | C-c C-t | Controller |
-

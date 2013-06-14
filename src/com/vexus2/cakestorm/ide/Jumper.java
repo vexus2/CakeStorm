@@ -1,12 +1,23 @@
 package com.vexus2.cakestorm.ide;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.vfs.VirtualFile;
 
-public class Jumper {
+abstract public class Jumper {
 
-    public static void toController(AnActionEvent event) {
+  protected AnActionEvent event = null;
+  protected FileManager fileManager = null;
+  protected static DirectoryManager directoryManager = null;
 
-        System.out.println(event.getClass());
+  protected Jumper(AnActionEvent e) {
+    event = e;
+    VirtualFile currentFile = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
+    fileManager = new FileManager(currentFile);
+    directoryManager = new DirectoryManager(currentFile, fileManager.getType());
+    directoryManager.setAppPath(fileManager.getAppPath(currentFile));
+  }
 
-    }
+
+  public abstract void jump();
 }
