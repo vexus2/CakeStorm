@@ -41,6 +41,8 @@ public class CakeStorm extends AnAction {
         // Helper→none
         // Component→none
 
+        // action内に複数renderしている箇所がある場合、移動先をポップアップで表示させる
+
         // 【いらない】Jump to Model
         // Controller→カーソル配下のModel
         //

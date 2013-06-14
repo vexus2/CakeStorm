@@ -5,24 +5,39 @@
   <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <small>most HTML tags may be used</small>
+          <html><body>
+				Utility for CakePHP developers. Provides the ability to easily jump between files.
+				<br/>
+				<ul>
+					<li>Alt+C, Alt+C - open default CakeStorm</li>
+					<li>Alt+C, Alt+S - open list with all CakeStormes</li>
+					<li>Alt+C, Alt+A - add new CakeStorm</li>
+				</ul>
+				In CakeStormes list popup:
+				<ul>
+				    <li>Alt+Up/Down - move CakeStorm</li>
+				    <li>Delete - delete CakeStorm</li>
+				    <li>Shift+F6 - rename CakeStorm</li>
+				    <li>Alt+Insert - add new CakeStorm</li>
+				</ul>
+				(See also "Main menu -> Tools -> CakeStorm")
+				<br/><br/>
+				For more details please visit GitHub page https://github.com/dkandalov/CakeStorm
+				</body></html>
       ]]></description>
 
-  <change-notes><![CDATA[
-      Add change notes here.<br>
-      <small>most HTML tags may be used</small>
-      ]]>
+  <change-notes>
+      <![CDATA[<html><body>
+        <ul>
+            <li>0.1 - First Release.</li>
+        </ul>
+        </body></html>
+        ]]>
   </change-notes>
 
-  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="107.105"/>
 
-  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
   <depends>com.intellij.modules.lang</depends>
-  -->
 
   <application-components>
     <!-- Add your application components here -->
@@ -33,7 +48,41 @@
   </project-components>
 
   <actions>
-    <!-- Add your actions here -->
+      <group id="CakeStorm.Menu" text="CakeStorm" popup="true">
+          <add-to-group anchor="last" group-id="ToolsMenu"/>
+          <action id="CakeStorm.JumpToController" class="com.vexus2.cakestorm.ide.Actions$JumpToController"
+                  text="Jump to Controller from TestCase." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="c"/>
+          </action>
+          <action id="CakeStorm.JumpToModel" class="com.vexus2.cakestorm.ide.Actions$JumpToModel"
+                  text="Jump to Model from Controller / Fixture / ModelTestCase." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="m"/>
+          </action>
+          <action id="CakeStorm.JumpToView" class="com.vexus2.cakestorm.ide.Actions$JumpToView"
+                  text="Jump to View from Controller in Action." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="v"/>
+          </action>
+          <action id="CakeStorm.JumpToComponent" class="com.vexus2.cakestorm.ide.Actions$JumpToComponent"
+                  text="Jump to Component from TestCase." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt p"/>
+          </action>
+          <action id="CakeStorm.JumpToBehavior" class="com.vexus2.cakestorm.ide.Actions$JumpToBehavior"
+                  text="Jump to Behavior from TestCase." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt b"/>
+          </action>
+          <action id="CakeStorm.JumpToHelper" class="com.vexus2.cakestorm.ide.Actions$JumpToHelper"
+                  text="Jump to Helper from TestCase." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt h"/>
+          </action>
+          <action id="CakeStorm.JumpToFixture" class="com.vexus2.cakestorm.ide.Actions$JumpToFixture"
+                  text="Jump to Fixture from Model." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt f"/>
+          </action>
+          <action id="CakeStorm.JumpToTestCase" class="com.vexus2.cakestorm.ide.Actions$JumpToTestCase"
+                  text="Jump to TestCase from Controller / Model." description="">
+              <keyboard-shortcut keymap="$default" first-keystroke="alt x" second-keystroke="alt t"/>
+          </action>
+      </group>
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
