@@ -1,4 +1,4 @@
-package com.vexus2.cakestorm.ide;
+package com.vexus2.cakestorm.lib;
 
 public enum FilePath {
   Controller,
@@ -14,5 +14,7 @@ public enum FilePath {
   BehaviorTest,
   ComponentTest,
   HelperTest,
+  TestFile,
+  FileSeparator,
   Fixture
 }

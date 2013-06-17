@@ -1,4 +1,4 @@
-package com.vexus2.cakestorm.ide;
+package com.vexus2.cakestorm.logic;
 
 public class JumperFactory {
   private static JumperFactory ourInstance = new JumperFactory();

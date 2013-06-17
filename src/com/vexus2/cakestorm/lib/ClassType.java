@@ -1,51 +1,25 @@
-package com.vexus2.cakestorm.ide;
+package com.vexus2.cakestorm.lib;
 
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public enum ClassType {
+  Controller,
+  View,
+  Model,
+  Helper,
+  Component,
+  Behavior,
+  Shell,
+  Task,
+  Fixture,
+  ControllerTestCase,
+  ModelTestCase,
+  BehaviorTestCase,
+  ComponentTestCase,
+  HelperTestCase;
 
-public class FileManager {
 
-  private static VirtualFileManager virtualFileManager = null;
-
-  private VirtualFile currentFile = null;
-
-  private ClassType type = null;
-
-  public ClassType getType() {
-    return type;
-  }
-
-  public VirtualFile getCurrentFile() {
-    return currentFile;
-  }
-
-  public FileManager(VirtualFile vf) {
-    virtualFileManager = VirtualFileManager.getInstance();
-    currentFile = vf;
-    type = getFileType(vf);
-  }
-
-  public VirtualFile getAppPath(VirtualFile currentFile) {
-    String appDirPath = null;
-    Pattern pattern = Pattern.compile("(.*?/app).*?");
-    Matcher matcher = pattern.matcher(currentFile.toString());
-
-    if (matcher.find()) {
-      appDirPath = matcher.group(1);
-    }
-
-    return virtualFileManager.findFileByUrl(appDirPath);
-  }
-
-  public VirtualFile createPath(String path) {
-    System.out.println(path);
-    return virtualFileManager.findFileByUrl(currentFile.toString() + path);
-  }
-
-  public ClassType getFileType(VirtualFile currentFile) {
+  public static ClassType getClassType(VirtualFile currentFile) {
     String currentFileStr = currentFile.toString();
     if (currentFileStr.matches(".*?(?i)test.*?")) {
       if (currentFileStr.matches(".*?(?i)controller.*?")) return ClassType.ControllerTestCase;
