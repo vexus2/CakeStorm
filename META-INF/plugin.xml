@@ -37,7 +37,9 @@
 
   <idea-version since-build="107.105"/>
 
+  <depends>com.jetbrains.php</depends>
   <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.modules.platform</depends>
 
   <application-components>
     <!-- Add your application components here -->

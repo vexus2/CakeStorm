@@ -18,6 +18,8 @@ public enum ClassType {
   ComponentTestCase,
   HelperTestCase;
 
+  private ClassType() {
+  }
 
   public static ClassType getClassType(VirtualFile currentFile) {
     String currentFileStr = currentFile.toString();

@@ -12,7 +12,6 @@ public class ControllerJumper extends Jumper {
 
   @Override
   public void jump() {
-//            Notifications.Bus.notify(new Notification("Jump To Controller", "Notice", "This action can be used only by [ControllerTestCase].", NotificationType.INFORMATION));
     switch (fileSystem.getType()) {
       case Controller:
         jumpToControllerTestCase();
@@ -21,7 +20,6 @@ public class ControllerJumper extends Jumper {
         jumpToController();
         break;
     }
-
   }
 
   public void jumpToControllerTestCase() {

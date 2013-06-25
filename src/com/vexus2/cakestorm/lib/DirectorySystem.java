@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @State(
     name = "CakeStorm.Settings",
@@ -153,12 +154,25 @@ public class DirectorySystem implements PersistentStateComponent<DirectorySystem
     return myState.cakeVersionAbsorption;
   }
 
-  public String getPath(FilePath filePath, String fileNameWithoutExtension) {
-    if (filePath.getClass().toString().matches(".*?(?i)test.*?")) {
-      return getCakeVersionAbsorption().get(filePath) + fileNameWithoutExtension + getCakeVersionAbsorption().get(FilePath.FileSeparator) + getCakeVersionAbsorption().get(FilePath.TestFile) + FileSystem.FILE_EXTENSION_PHP;
+  public String getPath(FilePath filePath, String betweenDirectory, String fileNameWithoutExtension) {
+    String fileExtension = (filePath == FilePath.View) ? FileSystem.FILE_EXTENSION_TEMPLATE : FileSystem.FILE_EXTENSION_PHP;
+    if (filePath.toString().matches(".*?(?i)test.*?")) {
+      return getCakeVersionAbsorption().get(filePath) + betweenDirectory + fileNameWithoutExtension + getCakeVersionAbsorption().get(FilePath.FileSeparator) + getCakeVersionAbsorption().get(FilePath.TestFile) + fileExtension;
     } else {
-      return getCakeVersionAbsorption().get(filePath) + fileNameWithoutExtension + getCakeVersionAbsorption().get(FilePath.FileSeparator) + FileSystem.FILE_EXTENSION_PHP;
+      return getCakeVersionAbsorption().get(filePath) + betweenDirectory + fileNameWithoutExtension + fileExtension;
     }
   }
+
+  public String getBetweenDirectoryPath(String betweenDirectory) {
+    if (betweenDirectory != null) {
+      if (myState.version == 1) {
+        betweenDirectory = betweenDirectory.toLowerCase();
+      }
+    }
+    betweenDirectory = Utility.replaceAllIgnoreCase("Controller|_", "", betweenDirectory);
+    return betweenDirectory + "/";
+  }
+
+
 
 }
