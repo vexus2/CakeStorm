@@ -49,6 +49,7 @@
     <!-- Add your project components here -->
   </project-components>
 
+    <!--TODO: Scratchを参考にして、グループ化はいし-->
   <actions>
       <group id="CakeStorm.Menu" text="CakeStorm" popup="true">
           <add-to-group anchor="last" group-id="ToolsMenu"/>
@@ -88,6 +89,6 @@
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+      <applicationService serviceInterface="com.vexus2.cakestorm.lib.CakeConfig" serviceImplementation="com.vexus2.cakestorm.lib.CakeConfig"/>
   </extensions>
 </idea-plugin>

@@ -1,32 +1,22 @@
 package com.vexus2.cakestorm.lib;
 
 
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Pattern;
 
-@State(
-    name = "CakeStorm.Settings",
-    storages = {
-        @Storage(id = "CakeStormSettings", file = "$WORKSPACE_FILE$")
-    }
-)
-public class DirectorySystem implements PersistentStateComponent<DirectorySystem.State> {
+
+public class DirectorySystem {
 
   private static VirtualFile appPath;
 
-  private State myState = new State();
+  private CakeConfig cakeConfig;
 
 
-  public DirectorySystem(VirtualFile vf, ClassType type) throws Exception {
-    if (myState.version != null) return;
+  public DirectorySystem(Project project, VirtualFile vf, ClassType type) throws Exception {
+    this.cakeConfig = CakeConfig.getInstance(project);
+    if (this.cakeConfig.getCakeVersion() != null) return;
     int version = checkVersion(vf, type);
     setDifferences(version);
   }
@@ -77,7 +67,7 @@ public class DirectorySystem implements PersistentStateComponent<DirectorySystem
       };
     }
 
-    setCakeVersionAbsorption(cakeVersionAbsorption);
+    cakeConfig.setCakeVersionAbsorption(cakeVersionAbsorption);
   }
 
   private int checkVersion(VirtualFile vf, ClassType type) throws Exception {
@@ -110,7 +100,7 @@ public class DirectorySystem implements PersistentStateComponent<DirectorySystem
       default:
         throw new Exception("File type is not defined.");
     }
-    setVersion(version);
+    cakeConfig.setCakeVersion(version);
     return version;
   }
 
@@ -122,57 +112,25 @@ public class DirectorySystem implements PersistentStateComponent<DirectorySystem
     DirectorySystem.appPath = appPath;
   }
 
-  @Nullable
-  @Override
-  public State getState() {
-    return myState;
-  }
-
-  @Override
-  public void loadState(State state) {
-    XmlSerializerUtil.copyBean(state, myState);
-  }
-
-  public class State {
-    private Map<FilePath, String> cakeVersionAbsorption;
-    private Integer version;
-  }
-
-  public void setCakeVersionAbsorption(Map<FilePath, String> cakeVersionDifferrence) {
-    this.myState.cakeVersionAbsorption = cakeVersionDifferrence;
-  }
-
-  public void setVersion(Integer version) {
-    this.myState.version = version;
-  }
-
-  public Integer getVersion() {
-    return myState.version;
-  }
-
-  public Map<FilePath, String> getCakeVersionAbsorption() {
-    return myState.cakeVersionAbsorption;
-  }
 
   public String getPath(FilePath filePath, String betweenDirectory, String fileNameWithoutExtension) {
     String fileExtension = (filePath == FilePath.View) ? FileSystem.FILE_EXTENSION_TEMPLATE : FileSystem.FILE_EXTENSION_PHP;
     if (filePath.toString().matches(".*?(?i)test.*?")) {
-      return getCakeVersionAbsorption().get(filePath) + betweenDirectory + fileNameWithoutExtension + getCakeVersionAbsorption().get(FilePath.FileSeparator) + getCakeVersionAbsorption().get(FilePath.TestFile) + fileExtension;
+      return cakeConfig.getCakeVersionAbsorption().get(filePath) + betweenDirectory + fileNameWithoutExtension + cakeConfig.getCakeVersionAbsorption().get(FilePath.FileSeparator) + cakeConfig.getCakeVersionAbsorption().get(FilePath.TestFile) + fileExtension;
     } else {
-      return getCakeVersionAbsorption().get(filePath) + betweenDirectory + fileNameWithoutExtension + fileExtension;
+      return cakeConfig.getCakeVersionAbsorption().get(filePath) + betweenDirectory + fileNameWithoutExtension + fileExtension;
     }
   }
 
   public String getBetweenDirectoryPath(String betweenDirectory) {
     if (betweenDirectory != null) {
-      if (myState.version == 1) {
+      if (cakeConfig.getCakeVersion() == 1) {
         betweenDirectory = betweenDirectory.toLowerCase();
       }
     }
     betweenDirectory = Utility.replaceAllIgnoreCase("Controller|_", "", betweenDirectory);
     return betweenDirectory + "/";
   }
-
 
 
 }

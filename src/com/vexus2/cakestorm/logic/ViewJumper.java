@@ -13,7 +13,6 @@ public class ViewJumper extends Jumper {
     super(e);
     PhpClass phpClass = PsiTreeUtil.getChildOfType(psiFile.getFirstChild(), PhpClass.class);
     this.controllerAction = new ControllerAction(phpClass, editor.getCaretModel().getOffset());
-    //current methodフラグを立てておく
   }
 
   @Override
@@ -21,7 +20,7 @@ public class ViewJumper extends Jumper {
     switch (fileSystem.getType()) {
       case Controller:
         Function function = this.controllerAction.getCurrentAction();
-        //TODO: 現在は全Viewが出てしまうが、view内にカーソルがあれば直にジャンプ出来るように設定する
+        //TODO: Show actions on cursor.
           fileSystem.filePopup(controllerAction);
 
         break;
