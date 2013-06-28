@@ -1,6 +1,6 @@
 package com.vexus2.cakestorm.lib;
 
-public enum FilePath {
+public enum CakeIdentifier {
   Controller,
   View,
   Model,
@@ -16,5 +16,6 @@ public enum FilePath {
   HelperTest,
   TestFile,
   FileSeparator,
-  Fixture
+  FileWordSeparator,
+  Fixture,
 }

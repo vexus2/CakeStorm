@@ -39,7 +39,6 @@ public class ControllerAction {
       }};
 
       while (matcher.find()) {
-        //TODO: シングルクォート、ダブルクォートを取り除く
         renderViews.add(matcher.group(1).replace("'", ""));
       }
 
@@ -62,5 +61,9 @@ public class ControllerAction {
 
   public String getCurrentControllerName() {
     return currentControllerName;
+  }
+
+  public void setActions(Map<String, Function> actions) {
+    this.actions = actions;
   }
 }

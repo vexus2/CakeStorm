@@ -1,40 +1,28 @@
 package com.vexus2.cakestorm.ide;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.vexus2.cakestorm.logic.ControllerJumper;
-import com.vexus2.cakestorm.logic.FeelingJumper;
-import com.vexus2.cakestorm.logic.ViewJumper;
+import com.vexus2.cakestorm.logic.SmartJumper;
 
 @SuppressWarnings("ComponentNotRegistered")
 public class Actions {
 
-  public static class Jump extends AnAction {
-    @Override
-    public void actionPerformed(AnActionEvent event) {
-        try {
-            new FeelingJumper(event).jump();
-        } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-
-    }
-
-    @Override
-    public void update(AnActionEvent e) {
-      e.getPresentation().setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
-    }
+  public static void notification(String message) {
+          Notifications.Bus.notify(
+          new Notification("CakeStorm", "CakeStorm Error", message, NotificationType.INFORMATION));
   }
 
-
-  public static class JumpToController extends AnAction {
+  public static class SmartJump extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
       try {
-        new ControllerJumper(event).jump();
+        new SmartJumper(event).jump();
       } catch (Exception e) {
-        e.printStackTrace();
+        notification(e.getMessage());
       }
     }
 
@@ -44,10 +32,14 @@ public class Actions {
     }
   }
 
-  public static class JumpToModel extends AnAction {
+  public static class JumpToControllerFromView extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
+      try {
+        new SmartJumper(event).jumpToControllerFromView();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
     }
 
     @Override
@@ -56,13 +48,45 @@ public class Actions {
     }
   }
 
-  public static class JumpToView extends AnAction {
+  public static class JumpToControllerFromTest extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
       try {
-        new ViewJumper(event).jump();
+        new SmartJumper(event).jumpToControllerFromTest();
       } catch (Exception e) {
-        e.printStackTrace();
+        notification(e.getMessage());
+      }
+    }
+
+    @Override
+    public void update(AnActionEvent e) {
+      e.getPresentation().setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
+    }
+  }
+
+  public static class JumpToModelFromFixture extends AnAction {
+    @Override
+    public void actionPerformed(AnActionEvent event) {
+      try {
+        new SmartJumper(event).jumpToModelFromFixture();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
+    }
+
+    @Override
+    public void update(AnActionEvent e) {
+      e.getPresentation().setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
+    }
+  }
+
+  public static class JumpToModelFromTest extends AnAction {
+    @Override
+    public void actionPerformed(AnActionEvent event) {
+      try {
+        new SmartJumper(event).jumpToModelFromTest();
+      } catch (Exception e) {
+        notification(e.getMessage());
       }
     }
 
@@ -75,7 +99,11 @@ public class Actions {
   public static class JumpToComponent extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
+      try {
+        new SmartJumper(event).jumpToComponent();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
     }
 
     @Override
@@ -87,7 +115,11 @@ public class Actions {
   public static class JumpToBehavior extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
+      try {
+        new SmartJumper(event).jumpToBehavior();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
     }
 
     @Override
@@ -95,11 +127,14 @@ public class Actions {
       e.getPresentation().setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
     }
   }
-
   public static class JumpToHelper extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
+      try {
+        new SmartJumper(event).jumpToHelper();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
     }
 
     @Override
@@ -111,7 +146,11 @@ public class Actions {
   public static class JumpToFixture extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
+      try {
+        new SmartJumper(event).jumpToFixture();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
     }
 
     @Override
@@ -120,10 +159,14 @@ public class Actions {
     }
   }
 
-  public static class JumpToTestCase extends AnAction {
+  public static class JumpToTest extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
+      try {
+        new SmartJumper(event).jumpToTest();
+      } catch (Exception e) {
+        notification(e.getMessage());
+      }
     }
 
     @Override
@@ -131,5 +174,4 @@ public class Actions {
       e.getPresentation().setEnabled(PlatformDataKeys.EDITOR.getData(e.getDataContext()) != null);
     }
   }
-
 }

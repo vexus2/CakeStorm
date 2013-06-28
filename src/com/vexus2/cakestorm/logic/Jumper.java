@@ -2,19 +2,25 @@ package com.vexus2.cakestorm.logic;
 
 import com.intellij.CommonBundle;
 import com.intellij.ide.IdeView;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.BalloonBuilder;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.wm.WindowManager;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
-import com.vexus2.cakestorm.event.CakeStormNotificationListener;
+import com.intellij.ui.awt.RelativePoint;
+import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.DirectorySystem;
-import com.vexus2.cakestorm.lib.FilePath;
 import com.vexus2.cakestorm.lib.FileSystem;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
+import java.awt.*;
 
 abstract public class Jumper {
 
@@ -48,17 +54,39 @@ abstract public class Jumper {
 
   public abstract void jump();
 
-  protected void jumpWithFilePath(FilePath filePath) {
-    String path = directorySystem.getPath(filePath, null, fileSystem.getCurrentFile().getNameWithoutExtension());
+  protected void jumpWithFilePath(CakeIdentifier cakeIdentifier) {
+    String path = directorySystem.getPath(cakeIdentifier, "", fileSystem.getCurrentFile().getNameWithoutExtension());
     VirtualFile virtualFile = fileSystem.virtualFileBy(directorySystem.getAppPath().toString() + path);
+    openOrNotice(virtualFile);
+  }
+
+  protected void openOrNotice(@Nullable VirtualFile virtualFile) {
     if (virtualFile == null) {
-      // Noticeを表示
-      Notifications.Bus.notify(
-          new Notification("CakeStorm", "File Not Found.", path + " is Notfound. <a href='create'>create?</a>",
-              NotificationType.INFORMATION, new CakeStormNotificationListener(project, directory)), project);
+      showBalloon("A jump target is not found.");
     } else {
       fileSystem.open(virtualFile);
     }
+  }
+
+  protected void showBalloon(String message) {
+//      Notifications.Bus.notify(
+//          new Notification("CakeStorm", "File Not Found.", path + " is Notfound. <a href='create'>create?</a>",
+//              NotificationType.INFORMATION, new CakeStormNotificationListener(project, directory)), project);
+
+    final JFrame frame = WindowManager.getInstance().getFrame(project.isDefault() ? null : project);
+    if (frame == null) return;
+    final JComponent component = frame.getRootPane();
+    if (component == null) return;
+    final Rectangle rect = component.getVisibleRect();
+    final Point p = new Point(rect.x + rect.width - 10, rect.y + 20);
+    final RelativePoint point = new RelativePoint(component, p);
+
+    final BalloonBuilder balloonBuilder = JBPopupFactory.getInstance().
+        createHtmlTextBalloonBuilder(message, MessageType.INFO.getDefaultIcon(),
+                                     MessageType.INFO.getPopupBackground(), null);
+    balloonBuilder.setShowCallout(false).setCloseButtonEnabled(true)
+                  .createBalloon().show(point, Balloon.Position.atLeft);
+
   }
 
   protected String getErrorTitle() {
