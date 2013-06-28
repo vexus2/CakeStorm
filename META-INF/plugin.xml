@@ -7,8 +7,7 @@
   <description>Utility for CakePHP developers. Provides the ability to easily jump between files.</description>
 
     <change-notes><![CDATA[
-<a href="https://github.com/dboissier/jenkins-control-plugin/blob/jenkins-control-plugin-0.8.0/README.txt">Read Me</a><br/>
-<a href="https://github.com/dboissier/jenkins-control-plugin/blob/jenkins-control-plugin-0.8.0/CHANGELOG.txt">Changelog</a>
+<a href="https://github.com/nanapi/cake-storm/blob/master/README.md">Read Me</a><br/>
 ]]> </change-notes>
 
   <idea-version since-build="107.105"/>
