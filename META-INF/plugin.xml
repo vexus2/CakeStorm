@@ -4,10 +4,36 @@
   <version>0.1</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
-  <description>Utility for CakePHP developers. Provides the ability to easily jump between files.</description>
+  <description><![CDATA[
+          <html><body>
+            CakeStorm is a PHPStorm plugin for CakePHP developers. <br>Provides the ability to easily jump between files.
+            <br><br>
+            <ul>
+                <li>Ctrl+; s - Smart Jump</li>
+                <li>Ctrl+; m - Jump To Model</li>
+                <li>Ctrl+; c - Jump To Controller</li>
+                <li>Ctrl+; f - Jump To Fixture</li>
+                <li>Ctrl+; b - Jump To Behavior</li>
+                <li>Ctrl+; h - Jump To Helper</li>
+                <li>Ctrl+; p - Jump To Component</li>
+                <li>Ctrl+; Ctrl-c - Jump To Controller TestCase</li>
+                <li>Ctrl+; Ctrl-m - Jump To Model TestCase</li>
+                <li>Ctrl+; Ctrl-p - Jump To Component TestCase</li>
+                <li>Ctrl+; Ctrl-b - Jump To Behavior TestCase</li>
+                <li>Ctrl+; Ctrl-h - Jump To Helper TestCase</li>
+                <li>Ctrl+; Ctrl-t - Jump To any TestCase</li>
+            </ul>
+
+            For more details please visit GitHub page https://github.com/nanapi/cake-storm
+         </body></html>
+]]></description>
 
     <change-notes><![CDATA[
-<a href="https://github.com/nanapi/cake-storm/blob/master/README.md">Read Me</a><br/>
+          <html><body>
+          version 0.1<br>
+          initial release.<br>
+
+         </body></html>
 ]]> </change-notes>
 
   <idea-version since-build="107.105"/>
