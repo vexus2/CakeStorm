@@ -48,4 +48,4 @@ You should memorize only "Smart Type"(Ctrl+; s).
 This provides a jump to the perfect place if exists a file.
 
 - I found bug. What should I do?
-Please open an [issue](https://github.com/nanapi/cake-storm/issues) or fix it and send pull request. :grin:
+Please open an [issue]() or fix it and send pull request. :grin:
