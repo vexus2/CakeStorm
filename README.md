@@ -3,7 +3,7 @@ CakeStorm is a PhpStorm plugin for CakePHP developers.
 
 Provides the ability to easily jump between files.
 
-![movie](http://plugins.jetbrains.com/files/7277/screenshot_14246.png)
+![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
 
 ## Requirements
 - PhpStorm 6.0.0+
