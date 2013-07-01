@@ -1,6 +1,9 @@
 # CakeStorm
-CakeStorm is a PHPStorm plugin for CakePHP developers.
+CakeStorm is a PhpStorm plugin for CakePHP developers.
+
 Provides the ability to easily jump between files.
+
+![movie](http://plugins.jetbrains.com/files/7277/screenshot_14246.png)
 
 ## Requirements
 - PhpStorm 6.0.0+
@@ -14,13 +17,6 @@ Provides the ability to easily jump between files.
 4. Search for CakeStorm
 5. Right Click and select Download and Install
 6. Save the settings and restart the IDE
-
-## Features
-ファイル間のジャンプを提供してくれます。
-
-困ったときにはスマートジャンプを使用してください。適切なファイルへのジャンプを行います。
-
-CakeStormのすべての動作のプレフィックスは Ctrl + ;です。
 
 ## Jump Command List
 | Current File | Command | Jump to |
@@ -46,13 +42,10 @@ CakeStormのすべての動作のプレフィックスは Ctrl + ;です。
 | HelperTestCase |C-; h| Helper |
 | Any File | C-; C-t | Any Test File |
 
-## Notes
+## FAQ
+- I can not remember commands which you should remember there are many.
+You should memorize only "Smart Type"(Ctrl+; s).
+This provides a jump to the perfect place if exists a file.
 
-ModelからModel、ModelからControllerへのdecalaration(Ctrl + B)によるジャンプ
-Jump Model From Controller like gf.
-show model list with popup.
-jump to elements from view.
-autocomplete.
-
-## Any problem?
-Please open an [issue](https://github.com/nanapi/cake-storm/issues).
+- I found bug. What should I do?
+Please open an [issue](https://github.com/nanapi/cake-storm/issues) or fix it and send pull request. :grin:
