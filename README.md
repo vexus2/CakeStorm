@@ -55,4 +55,4 @@ jump to elements from view.
 autocomplete.
 
 ## Any problem?
-Please open an  [issue](issues).
+Please open an [issue](https://github.com/nanapi/cake-storm/issues).

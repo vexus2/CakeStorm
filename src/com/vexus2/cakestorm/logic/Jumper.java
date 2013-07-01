@@ -2,7 +2,10 @@ package com.vexus2.cakestorm.logic;
 
 import com.intellij.CommonBundle;
 import com.intellij.ide.IdeView;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
@@ -32,8 +35,8 @@ abstract public class Jumper {
   protected PsiFile psiFile;
 
   protected Jumper(AnActionEvent e) throws Exception {
-    VirtualFile currentFile = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
-    this.psiFile = DataKeys.PSI_FILE.getData(e.getDataContext());
+    VirtualFile currentFile = PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
+    this.psiFile = LangDataKeys.PSI_FILE.getData(e.getDataContext());
     this.project = e.getProject();
     this.editor = PlatformDataKeys.EDITOR.getData(e.getDataContext());
     DataContext dataContext = e.getDataContext();

@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 public class CakeConfig implements PersistentStateComponent<CakeConfig> {
-  public Map<CakeIdentifier, String> cakeVersionAbsorption = new HashMap<>();
+  public Map<CakeIdentifier, String> cakeVersionAbsorption = new HashMap<CakeIdentifier, String>();
   public Integer cakeVersion;
 
   @Nullable

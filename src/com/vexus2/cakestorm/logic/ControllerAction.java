@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class ControllerAction {
   private String currentControllerName;
   private String currentActionName;
-  private Map<String, Function> actions = new HashMap<>();
+  private Map<String, Function> actions = new HashMap<String, Function>();
 
   public Map<String, Function> getActions() {
     return actions;
