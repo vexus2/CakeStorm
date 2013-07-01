@@ -44,8 +44,10 @@ Provides the ability to easily jump between files.
 
 ## FAQ
 - I can not remember commands which you should remember there are many.
+
 You should memorize only "Smart Type"(Ctrl+; s).
 This provides a jump to the perfect place if exists a file.
 
 - I found bug. What should I do?
+
 Please open an [issue]() or fix it and send pull request. :grin:
