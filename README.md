@@ -6,8 +6,7 @@ Provides the ability to easily jump between files.
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
 
 ## Requirements
-- PhpStorm 6.0.0+
-- IntelliJ Idea 12.0+ with PHP Plugin
+- PhpStorm 6.0.0+ or IntelliJ Idea 12.0+ with PHP Plugin
 - CakePHP ver.1.3+ or ver.2.0+
 
 ## Installation
