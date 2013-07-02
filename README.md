@@ -1,13 +1,13 @@
 # CakeStorm
-CakeStorm is a PhpStorm plugin for CakePHP developers.
+CakeStorm is a [PhpStorm](http://www.jetbrains.com/phpstorm/) plugin for [CakePHP](http://wwww.cakephp.org) developers.
 
-Provides the ability to easily jump between files.
+It provides the ability to easily jump between files.
 
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
 
 ## Requirements
 - PhpStorm 6.0.0+ or IntelliJ Idea 12.0+ with PHP Plugin
-- CakePHP ver.1.3+ or ver.2.0+
+- CakePHP 1.3+ or 2.x+
 
 ## Installation
 1. Go to File > Settings
@@ -42,11 +42,11 @@ Provides the ability to easily jump between files.
 | Any File | C-; C-t | Any Test File |
 
 ## FAQ
-- I can not remember commands which you should remember there are many.
+- I can not remember all those commands, there are too many.
 
-You should memorize only "Smart Type"(Ctrl+; s).
-This provides a jump to the perfect place if exists a file.
+You should at least memorize "Smart Type"(Ctrl+; s).
+This provides a jump to the right place if a certain file exists.
 
-- I found bug. What should I do?
+- I found a bug. What should I do?
 
-Please open an [issue]() or fix it and send pull request. :grin:
+Please open an [issue]() or fix it and send a pull request. :grin:
