@@ -16,11 +16,11 @@ public class DirectorySystem {
   private CakeConfig cakeConfig;
 
 
-  public DirectorySystem(Project project, VirtualFile vf, ClassType type) throws Exception {
+  public DirectorySystem(Project project, VirtualFile vf, CakeIdentifier identifier) throws Exception {
     this.cakeConfig = CakeConfig.getInstance(project);
     if (this.cakeConfig != null && this.cakeConfig.cakeVersion != null)
       return;
-    int version = checkVersion(vf, type);
+    int version = checkVersion(vf, identifier);
     setDifferences(version);
   }
 
@@ -33,6 +33,7 @@ public class DirectorySystem {
           put(CakeIdentifier.Controller, "/controllers/");
           put(CakeIdentifier.View, "/views/");
           put(CakeIdentifier.Model, "/models/");
+          put(CakeIdentifier.Element, "elements/");
           put(CakeIdentifier.Helper, "/views/helpers/");
           put(CakeIdentifier.Component, "/controllers/components/");
           put(CakeIdentifier.Behavior, "/models/behaviors/");
@@ -45,6 +46,7 @@ public class DirectorySystem {
           put(CakeIdentifier.HelperTest, "/tests/cases/helpers/");
           put(CakeIdentifier.Fixture, "/tests/fixtures/");
           put(CakeIdentifier.TestFile, "test");
+          put(CakeIdentifier.FixtureFile, "fixture");
           put(CakeIdentifier.FileSeparator, ".");
           put(CakeIdentifier.FileWordSeparator, "_");
         }
@@ -55,6 +57,7 @@ public class DirectorySystem {
           put(CakeIdentifier.Controller, "/Controller/");
           put(CakeIdentifier.View, "/View/");
           put(CakeIdentifier.Model, "/Model/");
+          put(CakeIdentifier.Element, "Elements/");
           put(CakeIdentifier.Helper, "/View/Helper/");
           put(CakeIdentifier.Component, "/Controller/Component/");
           put(CakeIdentifier.Behavior, "/Model/Behavior/");
@@ -67,6 +70,7 @@ public class DirectorySystem {
           put(CakeIdentifier.HelperTest, "/Test/Case/View/Helper/");
           put(CakeIdentifier.Fixture, "/Test/Fixture/");
           put(CakeIdentifier.TestFile, "Test");
+          put(CakeIdentifier.FixtureFile, "Fixture");
           put(CakeIdentifier.FileSeparator, "");
           put(CakeIdentifier.FileWordSeparator, "");
         }
@@ -76,25 +80,25 @@ public class DirectorySystem {
     cakeConfig.cakeVersionAbsorption = cakeVersionAbsorption;
   }
 
-  private int checkVersion(VirtualFile vf, ClassType type) throws Exception {
+  private int checkVersion(VirtualFile vf, CakeIdentifier identifier) throws Exception {
     String currentFileName = vf.toString();
     int version = 0;
-    switch (type) {
+    switch (identifier) {
       case Controller:
-      case ControllerTestCase:
+      case ControllerTest:
       case Component:
-      case ComponentTestCase:
+      case ComponentTest:
         version = currentFileName.matches(".*?controllers.*?") ? 1 : 2;
         break;
       case View:
       case Helper:
-      case HelperTestCase:
+      case HelperTest:
         version = currentFileName.matches(".*?views.*?") ? 1 : 2;
         break;
       case Model:
-      case ModelTestCase:
+      case ModelTest:
       case Behavior:
-      case BehaviorTestCase:
+      case BehaviorTest:
         version = currentFileName.matches(".*?models.*?") ? 1 : 2;
         break;
       case Shell:
@@ -139,9 +143,11 @@ public class DirectorySystem {
       }
     } else {
       if (cakeIdentifier.toString().matches(".*?(?i)(helper|behavior).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("test|\\.", "", fileNameWithoutExtension) + cakeIdentifier.toString() + fileExtension;
-      }else{
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("test|\\.", "", fileNameWithoutExtension) + fileExtension;
+        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + cakeIdentifier.toString() + fileExtension;
+      } else if (cakeIdentifier.toString().matches(".*?(?i)(fixture).*?")) {
+        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FileWordSeparator) + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FixtureFile) + fileExtension;
+      } else {
+        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + fileExtension;
       }
     }
   }

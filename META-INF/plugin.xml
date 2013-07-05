@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.1.1</version>
+  <version>0.2</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
   <description><![CDATA[
@@ -9,7 +9,7 @@
             CakeStorm is a PHPStorm plugin for CakePHP developers. <br>Provides the ability to easily jump between files.
             <br><br>
             <ul>
-                <li>Ctrl+; s - Smart Jump</li>
+                <li>Ctrl+; s - CakePHP SmartJump</li>
                 <li>Ctrl+; m - Jump To Model</li>
                 <li>Ctrl+; c - Jump To Controller</li>
                 <li>Ctrl+; f - Jump To Fixture</li>
@@ -30,9 +30,20 @@
 
     <change-notes><![CDATA[
           <html><body>
-          version 0.1<br>
-          initial release.<br>
+          version 0.2<br>
+          <ul>
+              <li>The name of SmartJump has been changed to CakePHP SmartJump.</li>
+              <li>Add View => Element jump for CakePHP SmartJump.</li>
+              <li>CakePHP SmartJump will display a pop-up in any scene.</li>
+              <li>CakePHP SmartJump can jump to Fixture <=> Model <=> ModelTestCase.
+              <li>Modified to display at the top of the list the current action.</li>
+              <li>Fixed a bug in when arguments are included in the 'render'.</li>
+          </ul>
 
+          version 0.1<br>
+          <ul>
+              <li>initial release.</li>
+          </ul>
          </body></html>
 ]]> </change-notes>
 
@@ -51,7 +62,7 @@
 
   <actions>
       <action id="CakeStorm.SmartJump" class="com.vexus2.cakestorm.ide.Actions$SmartJump"
-              text="SmartJump" description="Jump at a suitable place">
+              text="CakePHP SmartJump" description="View a full list that can be jump">
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="S"/>
       </action>
       <action id="CakeStorm.JumpToController" class="com.vexus2.cakestorm.ide.Actions$JumpToControllerFromView"

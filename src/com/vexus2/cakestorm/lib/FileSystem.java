@@ -11,7 +11,7 @@ import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.jetbrains.php.PhpIcons;
-import com.vexus2.cakestorm.logic.ControllerAction;
+import com.vexus2.cakestorm.logic.ControllerMethod;
 import com.vexus2.cakestorm.logic.Function;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +31,7 @@ public class FileSystem {
   private VirtualFile currentFile = null;
 
   // Current File
-  private ClassType type = null;
+  private CakeIdentifier identifier = null;
   private Project project;
   private DataContext context;
 
@@ -40,19 +40,18 @@ public class FileSystem {
     virtualFileManager = VirtualFileManager.getInstance();
     this.context = context;
     this.currentFile = vf;
-    this.type = ClassType.getClassType(vf);
+    this.identifier = CakeIdentifier.getIdentifier(vf);
   }
 
-  public int filePopup(ControllerAction controllerAction) {
-    Map<String, Function> currentActions = controllerAction.getActions();
+  public int filePopup(ControllerMethod controllerMethod) {
+    Map<String, Function> currentActions = controllerMethod.getActions();
     DefaultActionGroup group = new DefaultActionGroup();
-    String betweenDirectory = directorySystem.getBetweenDirectoryPath(controllerAction.getCurrentControllerName());
+    String betweenDirectory = directorySystem.getBetweenDirectoryPath(controllerMethod.getCurrentControllerName());
 
     for (Map.Entry<String, Function> e : currentActions.entrySet()) {
       String actionName = e.getValue().getName();
-      Boolean grouped = false;
       List<String> renderViews = e.getValue().getRenderViews();
-      createFilePopupActions(renderViews, group, betweenDirectory, actionName);
+      createViewPopupActions(renderViews, group, betweenDirectory, actionName);
     }
 
     if (group.getChildrenCount() != 0) {
@@ -62,13 +61,14 @@ public class FileSystem {
   }
 
   public int filePopup(@Nullable Function function, String controllerName) {
-    if (function == null) return 0;
+    if (function == null)
+      return 0;
     List<String> renderViews = function.getRenderViews();
     DefaultActionGroup group = new DefaultActionGroup();
     String betweenDirectory = directorySystem.getBetweenDirectoryPath(controllerName);
     String actionName = function.getName();
 
-    createFilePopupActions(renderViews, group, betweenDirectory, actionName);
+    createViewPopupActions(renderViews, group, betweenDirectory, actionName);
 
     if (group.getChildrenCount() != 0) {
       showPopup(group);
@@ -77,18 +77,18 @@ public class FileSystem {
     return group.getChildrenCount();
   }
 
-  private void showPopup(DefaultActionGroup group) {
+  public void showPopup(DefaultActionGroup group) {
     final ListPopup popup = JBPopupFactory.getInstance()
-        .createActionGroupPopup("Jump to...",
-            group,
-            context,
-            JBPopupFactory.ActionSelectionAid.ALPHA_NUMBERING,
-            true);
+                                          .createActionGroupPopup("Jump to...",
+                                                                  group,
+                                                                  context,
+                                                                  JBPopupFactory.ActionSelectionAid.ALPHA_NUMBERING,
+                                                                  true);
 
     popup.showCenteredInCurrentWindow(project);
   }
 
-  private void createFilePopupActions(List<String> renderViews, DefaultActionGroup group, String betweenDirectory, String actionName) {
+  public void createViewPopupActions(List<String> renderViews, DefaultActionGroup group, String betweenDirectory, String actionName) {
     Boolean grouped = false;
     for (String templateName : renderViews) {
       String actionPath = directorySystem.getPath(CakeIdentifier.View, betweenDirectory, templateName);
@@ -99,24 +99,27 @@ public class FileSystem {
         group.addSeparator(actionName);
         grouped = true;
       }
-      group.add(new AnAction(actionPath, virtualFile.getPath(), PhpIcons.PHP_FILE) {
-        @Override
-        public void actionPerformed(AnActionEvent e) {
-          VirtualFile fileByUrl = virtualFileManager.refreshAndFindFileByUrl("file://" + e.getPresentation().getDescription());
-          open(fileByUrl);
-        }
-      });
+      addGroupChild(group, actionPath, virtualFile);
     }
   }
 
-  public ClassType getType() {
-    return type;
+  public void addGroupChild(DefaultActionGroup group, final String actionPath, final VirtualFile virtualFile) {
+    group.add(new AnAction(actionPath, virtualFile.getPath(), PhpIcons.PHP_FILE) {
+      @Override
+      public void actionPerformed(AnActionEvent e) {
+        VirtualFile fileByUrl = virtualFileManager.refreshAndFindFileByUrl("file://" + e.getPresentation().getDescription());
+        open(fileByUrl);
+      }
+    });
+  }
+
+  public CakeIdentifier getIdentifier() {
+    return identifier;
   }
 
   public VirtualFile getCurrentFile() {
     return currentFile;
   }
-
 
   public VirtualFile getAppPath(VirtualFile currentFile) {
     String appDirPath = null;
@@ -158,5 +161,10 @@ public class FileSystem {
 
   public void setDirectorySystem(DirectorySystem directorySystem) {
     this.directorySystem = directorySystem;
+  }
+
+  public VirtualFile getVirtualFile(CakeIdentifier identifier) {
+    String path = directorySystem.getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension());
+    return this.virtualFileBy(directorySystem.getAppPath().toString() + path);
   }
 }

@@ -11,9 +11,10 @@ import java.util.Map;
 
 @State(
     name = "CakeStormCakeSettings",
+    reloadable = true,
     storages = {
         @Storage(id = "default", file = "$PROJECT_FILE$"),
-        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cake-config.xml", scheme = StorageScheme.DIRECTORY_BASED)
+        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cake-config_0.2.xml", scheme = StorageScheme.DIRECTORY_BASED)
     }
 )
 

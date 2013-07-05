@@ -1,92 +1,108 @@
 package com.vexus2.cakestorm.logic;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.FileSystem;
 
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SmartJumper extends Jumper {
-  private ControllerAction controllerAction;
+  private ViewMethod viewMethod;
+  private ControllerMethod controllerMethod;
 
   public SmartJumper(AnActionEvent e) throws Exception {
     super(e);
-    PhpClass phpClass = PsiTreeUtil.getChildOfType(psiFile.getFirstChild(), PhpClass.class);
-    if (phpClass != null) {
-      //TODO: controller以外ならも条件に追加したい
-      this.controllerAction = new ControllerAction(phpClass, editor.getCaretModel().getOffset());
+    if (this.fileSystem.getIdentifier() == CakeIdentifier.Controller) {
+      PhpClass phpClass = PsiTreeUtil.getChildOfType(psiFile.getFirstChild(), PhpClass.class);
+      if (phpClass != null) {
+        this.controllerMethod = new ControllerMethod(phpClass, editor.getCaretModel().getOffset());
+      }
+    } else if (this.fileSystem.getIdentifier() == CakeIdentifier.View) {
+      this.viewMethod = new ViewMethod(psiFile);
     }
   }
 
   @Override
   public void jump() {
-    switch (fileSystem.getType()) {
-      case Controller:
-        // Jump to current action or view's action.
-        int viewListCount = this.jumpToCurrentAction();
-        if (viewListCount == 0){
-          showBalloon("A jump target is not found.");
-        }
-        break;
-      case View:
-        this.jumpToControllerFromView();
-        break;
-      case Model:
-        //TODO: Select [testcase] or [fixture]
-        this.jumpToModelTestCase();
-        break;
-      case Helper:
-        jumpToHelperTestCase();
-        break;
-      case Component:
-        this.jumpToComponentTestCase();
-        break;
-      case Behavior:
-        this.jumpToBehaviorTestCase();
-        break;
-      case Shell:
-      case Task:
-      case Library:
-        showBalloon("A jump target is not found.");
-        break;
-      case Fixture:
-        // this.jumpToModelFromFixture();
-        showBalloon("A jump target is not found.");
-        break;
-      case ControllerTestCase:
-        this.jumpToControllerFromTest();
-        break;
-      case ModelTestCase:
-        this.jumpToModelFromTest();
-        break;
-      case BehaviorTestCase:
-        this.jumpToBehavior();
-        break;
-      case ComponentTestCase:
-        this.jumpToComponent();
-        break;
-      case HelperTestCase:
-        this.jumpToHelper();
-        break;
-      default:
-        showBalloon("A jump target is not found.");
-        break;
+    DefaultActionGroup group = new DefaultActionGroup();
+
+    addControllerGroups(group);
+    addViewGroups(group);
+
+    for (CakeIdentifier identifier : CakeIdentifier.values()) {
+      if (identifier == this.fileSystem.getIdentifier())
+        continue;
+
+      VirtualFile virtualFile = fileSystem.getVirtualFile(identifier);
+      if (virtualFile != null) {
+        group.addSeparator(identifier.toString());
+        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppPath(virtualFile).getPath().toString(), ""), virtualFile);
+      }
+    }
+    fileSystem.showPopup(group);
+  }
+
+  private void addViewGroups(DefaultActionGroup group) {
+    if (viewMethod != null) {
+      // view -> controller
+      Pattern pattern = Pattern.compile(fileSystem.getDirectorySystem().getCanonicalAppPath()
+                                            + fileSystem.getDirectorySystem().getCakeConfig().cakeVersionAbsorption.get(CakeIdentifier.View)
+                                            + "(.*?)/");
+      Matcher matcher = pattern.matcher(fileSystem.getCurrentFile().getPath());
+      String path = "";
+
+      if (matcher.find()) {
+        path = directorySystem.convertControllerName(matcher.group(1));
+      }
+
+      VirtualFile virtualFile = fileSystem.virtualFileBy(directorySystem.getAppPath().toString()
+                                                             + fileSystem.getDirectorySystem().getCakeConfig().cakeVersionAbsorption.get(CakeIdentifier.Controller)
+                                                             + path
+                                                             + FileSystem.FILE_EXTENSION_PHP);
+      if (virtualFile != null) {
+        group.addSeparator(CakeIdentifier.Controller.toString());
+        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppPath(virtualFile).getPath().toString(), ""), virtualFile);
+      }
+
+      // view -> element
+      List<String> renderElements = viewMethod.getRenderElements();
+
+      fileSystem.createViewPopupActions(renderElements,
+                                        group,
+                                        directorySystem.getCakeConfig().cakeVersionAbsorption.get(CakeIdentifier.Element),
+                                        CakeIdentifier.Element.toString());
+    }
+  }
+
+  private void addControllerGroups(DefaultActionGroup group) {
+    if (controllerMethod != null) {
+      Map<String, Function> currentActions = controllerMethod.getActions();
+      String betweenDirectory = directorySystem.getBetweenDirectoryPath(controllerMethod.getCurrentControllerName());
+
+      for (Map.Entry<String, Function> e : currentActions.entrySet()) {
+        String actionName = e.getValue().getName();
+        List<String> renderViews = e.getValue().getRenderViews();
+        fileSystem.createViewPopupActions(renderViews, group, betweenDirectory, actionName);
+      }
     }
   }
 
   public void jumpToAction() {
-    fileSystem.filePopup(controllerAction);
+    fileSystem.filePopup(controllerMethod);
   }
 
   public int jumpToCurrentAction() {
-    Function currentFocusFunction = this.controllerAction.getCurrentAction();
-    int targetViewCount = fileSystem.filePopup(currentFocusFunction, controllerAction.getCurrentControllerName());
+    Function currentFocusFunction = this.controllerMethod.getCurrentAction();
+    int targetViewCount = fileSystem.filePopup(currentFocusFunction, controllerMethod.getCurrentControllerName());
     if (currentFocusFunction == null || targetViewCount == 0) {
-      return fileSystem.filePopup(controllerAction);
+      return fileSystem.filePopup(controllerMethod);
     }
     return targetViewCount;
   }
