@@ -46,7 +46,7 @@ public class FileSystem {
   public int filePopup(ControllerMethod controllerMethod) {
     Map<String, Function> currentActions = controllerMethod.getActions();
     DefaultActionGroup group = new DefaultActionGroup();
-    String betweenDirectory = directorySystem.getBetweenDirectoryPath(controllerMethod.getCurrentControllerName());
+    String betweenDirectory = directorySystem.getCakeConfig().getBetweenDirectoryPath(controllerMethod.getCurrentControllerName());
 
     for (Map.Entry<String, Function> e : currentActions.entrySet()) {
       String actionName = e.getValue().getName();
@@ -65,7 +65,7 @@ public class FileSystem {
       return 0;
     List<String> renderViews = function.getRenderViews();
     DefaultActionGroup group = new DefaultActionGroup();
-    String betweenDirectory = directorySystem.getBetweenDirectoryPath(controllerName);
+    String betweenDirectory = directorySystem.getCakeConfig().getBetweenDirectoryPath(controllerName);
     String actionName = function.getName();
 
     createViewPopupActions(renderViews, group, betweenDirectory, actionName);
@@ -91,7 +91,7 @@ public class FileSystem {
   public void createViewPopupActions(List<String> renderViews, DefaultActionGroup group, String betweenDirectory, String actionName) {
     Boolean grouped = false;
     for (String templateName : renderViews) {
-      String actionPath = directorySystem.getPath(CakeIdentifier.View, betweenDirectory, templateName);
+      String actionPath = directorySystem.getCakeConfig().getPath(CakeIdentifier.View, betweenDirectory, templateName);
       VirtualFile virtualFile = this.virtualFileBy(directorySystem.getAppPath().toString() + actionPath);
       if (virtualFile == null)
         continue;
@@ -164,7 +164,7 @@ public class FileSystem {
   }
 
   public VirtualFile getVirtualFile(CakeIdentifier identifier) {
-    String path = directorySystem.getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension());
+    String path = directorySystem.getCakeConfig().getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension());
     return this.virtualFileBy(directorySystem.getAppPath().toString() + path);
   }
 }

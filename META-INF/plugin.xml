@@ -24,7 +24,7 @@
                 <li>Ctrl+; Ctrl-t - Jump To any TestCase</li>
             </ul>
 
-            For more details please visit GitHub page https://github.com/nanapi/cake-storm
+            For more details please visit GitHub page <a href="https://github.com/nanapi/cake-storm">https://github.com/nanapi/cake-storm</a>
          </body></html>
 ]]></description>
 
@@ -117,5 +117,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
       <projectService serviceInterface="com.vexus2.cakestorm.lib.CakeConfig" serviceImplementation="com.vexus2.cakestorm.lib.CakeConfig"/>
+      <!--<completion.contributor language="PHP" implementationClass="com.vexus2.cakestorm.reference.CakeStormCompletionContributor"/>-->
+      <psi.referenceContributor implementation="com.vexus2.cakestorm.reference.CakeStormReferenceContributor"/>
   </extensions>
 </idea-plugin>

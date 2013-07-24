@@ -58,7 +58,7 @@ abstract public class Jumper {
   public abstract void jump();
 
   protected void jumpWithFilePath(CakeIdentifier cakeIdentifier) {
-    String path = directorySystem.getPath(cakeIdentifier, "", fileSystem.getCurrentFile().getNameWithoutExtension());
+    String path = directorySystem.getCakeConfig().getPath(cakeIdentifier, "", fileSystem.getCurrentFile().getNameWithoutExtension());
     VirtualFile virtualFile = fileSystem.virtualFileBy(directorySystem.getAppPath().toString() + path);
     openOrNotice(virtualFile);
   }

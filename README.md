@@ -17,6 +17,15 @@ It provides the ability to easily jump between files.
 5. Right Click and select Download and Install
 6. Save the settings and restart the IDE
 
+## What's New
+### Version 0.2
+- The name of SmartJump has been changed to CakePHP SmartJump.
+- Add View => Element jump for CakePHP SmartJump.
+- CakePHP SmartJump will display a pop-up in any scene.
+- CakePHP SmartJump can jump to Fixture <=> Model <=> ModelTestCase.
+- Modified to display at the top of the list the current action.
+- Fixed a bug in when arguments are included in the 'render'.
+
 ## Jump Command List
 | Current File | Command | Jump to |
 | --- | --- | --- |
@@ -40,15 +49,6 @@ It provides the ability to easily jump between files.
 | BehaviorTestCase |C-; b| Behavior |
 | HelperTestCase |C-; h| Helper |
 | Any File | C-; C-t | Any Test File |
-
-## What's New
-### Version 0.2
-- The name of SmartJump has been changed to CakePHP SmartJump.
-- Add View => Element jump for CakePHP SmartJump.
-- CakePHP SmartJump will display a pop-up in any scene.
-- CakePHP SmartJump can jump to Fixture <=> Model <=> ModelTestCase.
-- Modified to display at the top of the list the current action.
-- Fixed a bug in when arguments are included in the 'render'.
 
 ## FAQ
 - I can not remember all those commands, there are too many.

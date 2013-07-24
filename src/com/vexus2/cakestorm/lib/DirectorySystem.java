@@ -132,47 +132,6 @@ public class DirectorySystem {
   }
 
 
-  public String getPath(CakeIdentifier cakeIdentifier, String betweenDirectory, String fileNameWithoutExtension) {
-    String fileExtension = (cakeIdentifier == CakeIdentifier.View) ? FileSystem.FILE_EXTENSION_TEMPLATE : FileSystem.FILE_EXTENSION_PHP;
-    String coreDir = cakeConfig.cakeVersionAbsorption.get(cakeIdentifier);
-    if (cakeIdentifier.toString().matches(".*?(?i)test.*?")) {
-      if (cakeIdentifier.toString().matches(".*?(?i)(helper|behavior).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("helper|behavior", "", fileNameWithoutExtension) + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
-      } else {
-        return coreDir + betweenDirectory + fileNameWithoutExtension + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FileSeparator) + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
-      }
-    } else {
-      if (cakeIdentifier.toString().matches(".*?(?i)(helper|behavior).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + cakeIdentifier.toString() + fileExtension;
-      } else if (cakeIdentifier.toString().matches(".*?(?i)(fixture).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FileWordSeparator) + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FixtureFile) + fileExtension;
-      } else {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + fileExtension;
-      }
-    }
-  }
-
-  public String getBetweenDirectoryPath(String betweenDirectory) {
-    if (betweenDirectory != null) {
-      if (cakeConfig.cakeVersion == 1) {
-        betweenDirectory = betweenDirectory.toLowerCase();
-      }
-    }
-    betweenDirectory = Utility.replaceAllIgnoreCase("Controller|_", "", betweenDirectory);
-    return betweenDirectory + "/";
-  }
-
-  public String convertControllerName(String name) {
-    if (cakeConfig.cakeVersion == 1) {
-      //TODO: use inflector to convert singularize and pluralize.
-      name = name + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FileWordSeparator) + "Controller";
-      name = Utility.camelToSnake(name);
-    } else {
-      name = name + cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.FileWordSeparator) + "Controller";
-    }
-    return name;
-  }
-
   public CakeConfig getCakeConfig() {
     return cakeConfig;
   }
