@@ -1,9 +1,9 @@
 # CakeStorm
+[日本語版ReadMEはこちら](https://github.com/nanapi/cake-storm/blob/master/README_ja.md)
+
 CakeStorm is a [PhpStorm](http://www.jetbrains.com/phpstorm/) plugin for [CakePHP](http://wwww.cakephp.org) developers.
 
 It provides the ability to easily jump between files.
-
-[日本語版ReadMEはこちら](https://github.com/nanapi/cake-storm/blob/master/README_ja.md)
 
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
 
