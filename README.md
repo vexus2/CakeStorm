@@ -3,7 +3,11 @@ CakeStorm is a [PhpStorm](http://www.jetbrains.com/phpstorm/) plugin for [CakePH
 
 It provides the ability to easily jump between files.
 
+![日本語版ReadMEはこちら](https://github.com/nanapi/cake-storm/blob/master/README_ja.md)
+
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
+
+![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation2.gif)
 
 ## Requirements
 - PhpStorm 6.0.0+ or IntelliJ Idea 12.0+ with PHP Plugin
@@ -18,6 +22,9 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.3
+- Add a references to Model, View, to the Element from any files.
+
 ### Version 0.2
 - The name of SmartJump has been changed to CakePHP SmartJump.
 - Add View => Element jump for CakePHP SmartJump.
@@ -56,6 +63,11 @@ It provides the ability to easily jump between files.
 You should at least memorize "CakePHP SmartJump"(Ctrl+; s).
 This provides a jump to the right place if a certain file exists.
 
+- How to jump to the View file?
+
+Use PhpStorm's 'Go to declaration' action.
+Default Keybind is "Ctrl+b"
+
 - I found a bug. What should I do?
 
-Please open an [issue]() or fix it and send a pull request. :grin:
+Please open an [issue](https://github.com/nanapi/cake-storm/issues) or fix it and send a pull request. :grin:
