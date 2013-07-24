@@ -65,7 +65,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
         betweenDirectory = betweenDirectory.toLowerCase();
       }
     }
-    betweenDirectory = Utility.replaceAllIgnoreCase("Controller|_", "", betweenDirectory);
+    betweenDirectory = Utility.replaceAllIgnoreCase("Controller|_|\\.php", "", betweenDirectory);
     return betweenDirectory + "/";
   }
 

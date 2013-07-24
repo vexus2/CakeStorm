@@ -33,7 +33,7 @@ public class SmartJumper extends Jumper {
   public void jump() {
     DefaultActionGroup group = new DefaultActionGroup();
 
-    addControllerGroups(group);
+   addControllerGroups(group);
     addViewGroups(group);
 
     for (CakeIdentifier identifier : CakeIdentifier.values()) {
@@ -43,7 +43,7 @@ public class SmartJumper extends Jumper {
       VirtualFile virtualFile = fileSystem.getVirtualFile(identifier);
       if (virtualFile != null) {
         group.addSeparator(identifier.toString());
-        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppPath(virtualFile).getPath().toString(), ""), virtualFile);
+        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppFile(virtualFile).getPath().toString(), ""), virtualFile);
       }
     }
     fileSystem.showPopup(group);
@@ -68,7 +68,7 @@ public class SmartJumper extends Jumper {
           + FileSystem.FILE_EXTENSION_PHP);
       if (virtualFile != null) {
         group.addSeparator(CakeIdentifier.Controller.toString());
-        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppPath(virtualFile).getPath().toString(), ""), virtualFile);
+        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppFile(virtualFile).getPath().toString(), ""), virtualFile);
       }
 
       // view -> element

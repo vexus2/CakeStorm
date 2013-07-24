@@ -14,6 +14,11 @@ public class CakeStormReferenceContributor extends PsiReferenceContributor {
         PlatformPatterns.psiElement(StringLiteralExpression.class).withLanguage(PhpLanguage.INSTANCE),
         new StringLiteralReferenceProvider()
     );
+
+//    psiReferenceRegistrar.registerReferenceProvider(
+//        PlatformPatterns.psiElement(StringLiteralExpression.class).withLanguage(PhpLanguage.INSTANCE),
+//        new TemplateReferenceProvider()
+//    );
   }
 
 

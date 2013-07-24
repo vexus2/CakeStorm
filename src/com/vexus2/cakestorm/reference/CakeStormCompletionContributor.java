@@ -11,13 +11,14 @@ import com.intellij.util.ProcessingContext;
 import com.jetbrains.php.PhpIndex;
 import com.jetbrains.php.completion.PhpLookupElement;
 import com.jetbrains.php.completion.insert.PhpReferenceInsertHandler;
-import com.jetbrains.php.lang.psi.elements.*;
+import com.jetbrains.php.lang.psi.elements.Method;
+import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.stubs.indexes.PhpClassIndex;
 import com.jetbrains.php.lang.psi.stubs.indexes.PhpFunctionIndex;
 import com.jetbrains.php.phpunit.PhpUnitUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

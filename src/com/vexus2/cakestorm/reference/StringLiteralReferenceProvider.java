@@ -1,16 +1,20 @@
 package com.vexus2.cakestorm.reference;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceProvider;
 import com.intellij.util.ProcessingContext;
 import com.jetbrains.php.PhpIndex;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
+import com.vexus2.cakestorm.lib.CakeConfig;
+import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.ClassReference;
+import com.vexus2.cakestorm.lib.FileSystem;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Matcher;
@@ -31,6 +35,31 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
       return PsiReference.EMPTY_ARRAY;
 
     Collection<PhpClass> phpClasses = PhpIndex.getInstance(psiElement.getProject()).getClassesByFQN(jumpFileName);
+
+    if (phpClasses.isEmpty()) {
+
+      CakeConfig cakeConfig = CakeConfig.getInstance(psiElement.getProject());
+      String controllerName = cakeConfig.getBetweenDirectoryPath(psiElement.getContainingFile().getVirtualFile().getName());
+      String filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
+      VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
+      if(virtualFile == null) {
+        controllerName = cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.Element);
+        filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
+        virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
+      }
+      if (virtualFile != null) {
+        PsiReference ref = new ClassReference(
+            virtualFile,
+            cursorText.substring(textRange.getStartOffset(), textRange.getEndOffset()),
+            psiElement,
+            textRange,
+            psiElement.getProject(),
+            virtualFile);
+        return new PsiReference[]{ref};
+      }
+      return PsiReference.EMPTY_ARRAY;
+    }
+
     ArrayList<PsiReference> refList = new ArrayList<PsiReference>();
 
     for (PhpClass phpClass : phpClasses) {

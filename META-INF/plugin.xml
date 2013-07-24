@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.2</version>
+  <version>0.3</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
   <description><![CDATA[
@@ -9,19 +9,8 @@
             CakeStorm is a PHPStorm plugin for CakePHP developers. <br>Provides the ability to easily jump between files.
             <br><br>
             <ul>
+                <li>Ctrl+B(Ctrl+Click) - Go to declaration</li>
                 <li>Ctrl+; s - CakePHP SmartJump</li>
-                <li>Ctrl+; m - Jump To Model</li>
-                <li>Ctrl+; c - Jump To Controller</li>
-                <li>Ctrl+; f - Jump To Fixture</li>
-                <li>Ctrl+; b - Jump To Behavior</li>
-                <li>Ctrl+; h - Jump To Helper</li>
-                <li>Ctrl+; p - Jump To Component</li>
-                <li>Ctrl+; Ctrl-c - Jump To Controller TestCase</li>
-                <li>Ctrl+; Ctrl-m - Jump To Model TestCase</li>
-                <li>Ctrl+; Ctrl-p - Jump To Component TestCase</li>
-                <li>Ctrl+; Ctrl-b - Jump To Behavior TestCase</li>
-                <li>Ctrl+; Ctrl-h - Jump To Helper TestCase</li>
-                <li>Ctrl+; Ctrl-t - Jump To any TestCase</li>
             </ul>
 
             For more details please visit GitHub page <a href="https://github.com/nanapi/cake-storm">https://github.com/nanapi/cake-storm</a>
@@ -30,7 +19,12 @@
 
     <change-notes><![CDATA[
           <html><body>
-          version 0.2<br>
+          version 0.3<br>
+          <ul>
+              <li>Add a references to Model, View, to the Element from any files.</li>
+          </ul>
+
+          <p>version 0.2</p>
           <ul>
               <li>The name of SmartJump has been changed to CakePHP SmartJump.</li>
               <li>Add View => Element jump for CakePHP SmartJump.</li>
@@ -40,7 +34,7 @@
               <li>Fixed a bug in when arguments are included in the 'render'.</li>
           </ul>
 
-          version 0.1<br>
+          <p>version 0.1</p>
           <ul>
               <li>initial release.</li>
           </ul>

@@ -121,7 +121,7 @@ public class FileSystem {
     return currentFile;
   }
 
-  public VirtualFile getAppPath(VirtualFile currentFile) {
+  public VirtualFile getAppFile(VirtualFile currentFile) {
     String appDirPath = null;
     Pattern pattern = Pattern.compile("(.*?/app).*?");
     Matcher matcher = pattern.matcher(currentFile.toString());
@@ -166,5 +166,17 @@ public class FileSystem {
   public VirtualFile getVirtualFile(CakeIdentifier identifier) {
     String path = directorySystem.getCakeConfig().getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension());
     return this.virtualFileBy(directorySystem.getAppPath().toString() + path);
+  }
+
+  public static String getAppPath(VirtualFile virtualFile) {
+    String appDirPath = null;
+    Pattern pattern = Pattern.compile("(.*?/app).*?");
+    Matcher matcher = pattern.matcher(virtualFile.toString());
+
+    if (matcher.find()) {
+      appDirPath = matcher.group(1);
+    }
+
+    return appDirPath;
   }
 }

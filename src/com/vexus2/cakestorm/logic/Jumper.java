@@ -49,7 +49,7 @@ abstract public class Jumper {
     this.fileSystem = new FileSystem(currentFile, e.getDataContext());
     this.fileSystem.setProject(e.getProject());
     directorySystem = new DirectorySystem(e.getProject(), currentFile, fileSystem.getIdentifier());
-    directorySystem.setAppPath(fileSystem.getAppPath(currentFile));
+    directorySystem.setAppPath(fileSystem.getAppFile(currentFile));
     this.fileSystem.setProject(e.getProject());
     this.fileSystem.setDirectorySystem(directorySystem);
   }
