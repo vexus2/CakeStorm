@@ -20,8 +20,7 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 
 ## 更新履歴
 ### Version 0.3
-- ファイル内の文字列からModelやView、Elementへのファイル参照を追加
-  これによりGo to Decralation(Ctrl+B) または Ctrl+クリックでのジャンプが可能になります。
+- ファイル内の文字列からModelやView、Elementへのファイル参照を追加しました。これによりGo to Decralation(Ctrl+B or Ctrl+クリック)でのジャンプが可能になります。
 
 ### Version 0.2
 - SmartJumpをCakePHP SmartJumpに名称変更。これに伴い[Find Action]にて「Cake」と入力すればSmart Jumpがサジェストされます。
