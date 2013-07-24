@@ -3,7 +3,7 @@ CakeStorm is a [PhpStorm](http://www.jetbrains.com/phpstorm/) plugin for [CakePH
 
 It provides the ability to easily jump between files.
 
-![日本語版ReadMEはこちら](https://github.com/nanapi/cake-storm/blob/master/README_ja.md)
+[日本語版ReadMEはこちら](https://github.com/nanapi/cake-storm/blob/master/README_ja.md)
 
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
 
