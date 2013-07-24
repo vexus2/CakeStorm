@@ -82,7 +82,7 @@ public class FileSystem {
                                           .createActionGroupPopup("Jump to...",
                                                                   group,
                                                                   context,
-                                                                  JBPopupFactory.ActionSelectionAid.ALPHA_NUMBERING,
+                                                                  JBPopupFactory.ActionSelectionAid.NUMBERING,
                                                                   true);
 
     popup.showCenteredInCurrentWindow(project);
