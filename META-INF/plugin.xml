@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.3</version>
+  <version>0.3.1</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
   <description><![CDATA[
@@ -19,12 +19,12 @@
 
     <change-notes><![CDATA[
           <html><body>
-          version 0.3.1<br>
+          <p>version 0.3.1</p>
           <ul>
               <li>Fixed bug when first boot.</li>
           </ul>
 
-          version 0.3<br>
+          <p>version 0.3</p>
           <ul>
               <li>Add a references to Model, View, to the Element from any files.</li>
           </ul>
