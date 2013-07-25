@@ -149,6 +149,9 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
   }
 
   private static int checkVersion(VirtualFile vf, CakeIdentifier identifier) {
+    if (identifier == null) {
+      identifier = CakeIdentifier.Other;
+    }
     String currentFileName = vf.toString();
     int version = 0;
     switch (identifier) {
@@ -180,7 +183,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
         version = currentFileName.matches(".*?libs.*?") ? 1 : 2;
         break;
       default:
-        version = 2;
+        version = vf.getName().matches("[a-z\\p{Punct}]+") ? 1 : 2;
     }
     cakeVersion = version;
     return version;

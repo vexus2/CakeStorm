@@ -22,7 +22,8 @@ public enum CakeIdentifier {
   Fixture,
   Library,
   Element,
-  FixtureFile;
+  FixtureFile,
+  Other;
 
   private CakeIdentifier() {
   }
