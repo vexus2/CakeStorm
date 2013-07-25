@@ -37,12 +37,15 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
     Collection<PhpClass> phpClasses = PhpIndex.getInstance(psiElement.getProject()).getClassesByFQN(jumpFileName);
 
     if (phpClasses.isEmpty()) {
-
       CakeConfig cakeConfig = CakeConfig.getInstance(psiElement.getProject());
+      if(cakeConfig.isEmpty()) {
+        VirtualFile tmpVirtualFile = psiElement.getContainingFile().getVirtualFile();
+        cakeConfig.init(tmpVirtualFile, CakeIdentifier.getIdentifier(tmpVirtualFile));
+      }
       String controllerName = cakeConfig.getBetweenDirectoryPath(psiElement.getContainingFile().getVirtualFile().getName());
       String filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
       VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
-      if(virtualFile == null) {
+      if (virtualFile == null) {
         controllerName = cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.Element);
         filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
         virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);

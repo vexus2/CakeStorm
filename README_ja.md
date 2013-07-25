@@ -19,6 +19,9 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.3.1
+- 初回インストール時にNullPointerExceptionが発生する不具合を修正しました。
+
 ### Version 0.3
 - ファイル内の文字列からModelやView、Elementへのファイル参照を追加しました。これによりGo to Decralation(Ctrl+B or Ctrl+クリック)でのジャンプが可能になります。
 

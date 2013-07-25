@@ -19,6 +19,11 @@
 
     <change-notes><![CDATA[
           <html><body>
+          version 0.3.1<br>
+          <ul>
+              <li>Fixed bug when first boot.</li>
+          </ul>
+
           version 0.3<br>
           <ul>
               <li>Add a references to Model, View, to the Element from any files.</li>

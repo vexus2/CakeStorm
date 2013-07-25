@@ -22,6 +22,9 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.3.1
+- Fixed bug when first boot.
+
 ### Version 0.3
 - Add a references to Model, View, to the Element from any files.
 
