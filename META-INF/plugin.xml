@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.3.1</version>
+  <version>0.3.3</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
   <description><![CDATA[
@@ -19,6 +19,11 @@
 
     <change-notes><![CDATA[
           <html><body>
+          <p>version 0.3.3</p>
+          <ul>
+              <li>Fixed PersistentStateComponent.</li>
+          </ul>
+
           <p>version 0.3.2</p>
           <ul>
               <li>Fixed bug.</li>

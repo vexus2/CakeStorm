@@ -21,8 +21,8 @@ import java.util.Map;
 
 
 public class CakeConfig implements PersistentStateComponent<CakeConfig> {
-  public static Map<CakeIdentifier, String> cakeVersionAbsorption = new HashMap<CakeIdentifier, String>();
-  public static Integer cakeVersion;
+  public Map<CakeIdentifier, String> cakeVersionAbsorption = new HashMap<CakeIdentifier, String>();
+  public Integer cakeVersion;
 
   @Nullable
   @Override
@@ -92,8 +92,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
     return name;
   }
 
-  private static void setDifferences(int version) {
-    //TODO: add lib pattern.
+  private void setDifferences(int version) {
     HashMap<CakeIdentifier, String> identifierStringHashMap;
     if (version == 1) {
       identifierStringHashMap = new HashMap<CakeIdentifier, String>() {
@@ -145,10 +144,10 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
       };
     }
 
-    cakeVersionAbsorption = identifierStringHashMap;
+    this.cakeVersionAbsorption = identifierStringHashMap;
   }
 
-  private static int checkVersion(VirtualFile vf, CakeIdentifier identifier) {
+  private int checkVersion(VirtualFile vf, CakeIdentifier identifier) {
     if (identifier == null) {
       identifier = CakeIdentifier.Other;
     }
@@ -185,7 +184,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
       default:
         version = vf.getName().matches("[a-z\\p{Punct}]+") ? 1 : 2;
     }
-    cakeVersion = version;
+    this.cakeVersion = version;
     return version;
   }
 
