@@ -7,6 +7,8 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation2.gif)
 
+![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation3.gif)
+
 ## 動作環境
 - PhpStorm 6.0.0+ or IntelliJ Idea 12.0+(PHP Plugin必須)
 - CakePHP 1.3+ or 2.x+
