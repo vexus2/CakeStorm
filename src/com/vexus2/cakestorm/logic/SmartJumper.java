@@ -7,6 +7,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.FileSystem;
+import com.vexus2.cakestorm.lib.OpenType;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,11 @@ public class SmartJumper extends Jumper {
   private ControllerMethod controllerMethod;
 
   public SmartJumper(AnActionEvent e) throws Exception {
-    super(e);
+    this(e, OpenType.DEFAULT);
+  }
+
+  public SmartJumper(AnActionEvent e, OpenType openType) throws Exception {
+    super(e, openType);
     if (this.fileSystem.getIdentifier() == CakeIdentifier.Controller) {
       PhpClass phpClass = PsiTreeUtil.getChildOfType(psiFile.getFirstChild(), PhpClass.class);
       if (phpClass != null) {

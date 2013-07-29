@@ -1,10 +1,10 @@
 package com.vexus2.cakestorm.lib;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
+import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
+import com.intellij.openapi.fileEditor.impl.EditorWindow;
+import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
@@ -34,6 +34,7 @@ public class FileSystem {
   private CakeIdentifier identifier = null;
   private Project project;
   private DataContext context;
+  private OpenType openType;
 
 
   public FileSystem(VirtualFile vf, DataContext context) {
@@ -79,11 +80,11 @@ public class FileSystem {
 
   public void showPopup(DefaultActionGroup group) {
     final ListPopup popup = JBPopupFactory.getInstance()
-                                          .createActionGroupPopup("Jump to...",
-                                                                  group,
-                                                                  context,
-                                                                  JBPopupFactory.ActionSelectionAid.NUMBERING,
-                                                                  true);
+        .createActionGroupPopup("Open File",
+            group,
+            context,
+            JBPopupFactory.ActionSelectionAid.NUMBERING,
+            true);
 
     popup.showCenteredInCurrentWindow(project);
   }
@@ -108,7 +109,33 @@ public class FileSystem {
       @Override
       public void actionPerformed(AnActionEvent e) {
         VirtualFile fileByUrl = virtualFileManager.refreshAndFindFileByUrl("file://" + e.getPresentation().getDescription());
-        open(fileByUrl);
+        FileEditorManagerEx fileEditorManagerEx = FileEditorManagerEx.getInstanceEx(e.getProject());
+        switch (openType) {
+          case VERTICAL:
+            fileEditorManagerEx.createSplitter(1, EditorWindow.DATA_KEY.getData(e.getDataContext()));
+            openNextTab(e.getDataContext(), fileByUrl);
+            break;
+          case HORIZONTAL:
+            fileEditorManagerEx.createSplitter(1, EditorWindow.DATA_KEY.getData(e.getDataContext()));
+            fileEditorManagerEx.changeSplitterOrientation();
+            openNextTab(e.getDataContext(), fileByUrl);
+            break;
+          case DEFAULT:
+            open(fileByUrl);
+            break;
+        }
+      }
+
+      private void openNextTab(DataContext dataContext, VirtualFile file) {
+        final FileEditorManagerEx fileEditorManager = FileEditorManagerEx.getInstanceEx(project);
+        final EditorWindow activeWindow = EditorWindow.DATA_KEY.getData(dataContext);
+        if (activeWindow == null)
+          return;
+        final EditorWindow nextWindow = fileEditorManager.getNextWindow(activeWindow);
+        if (nextWindow == null)
+          return;
+        nextWindow.getManager().openFileImpl2(nextWindow, file, true);
+        nextWindow.closeAllExcept(file);
       }
     });
   }
@@ -178,5 +205,9 @@ public class FileSystem {
     }
 
     return appDirPath;
+  }
+
+  public void setOpenType(OpenType openType) {
+    this.openType = openType;
   }
 }

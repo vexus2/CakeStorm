@@ -74,6 +74,14 @@
               text="CakePHP SmartJump" description="View a full list that can be jump">
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="S"/>
       </action>
+      <action id="CakeStorm.HorizontalSmartJump" class="com.vexus2.cakestorm.ide.Actions$HorizontalSmartJump"
+              text="CakePHP SmartJump with Horizontal Tab" description="View a full list that can be jump">
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="H"/>
+      </action>
+      <action id="CakeStorm.VerticalSmartJump" class="com.vexus2.cakestorm.ide.Actions$VerticalSmartJump"
+              text="CakePHP SmartJump with Vertical Tab" description="View a full list that can be jump">
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="V"/>
+      </action>
       <action id="CakeStorm.JumpToController" class="com.vexus2.cakestorm.ide.Actions$JumpToControllerFromView"
               text="Jump to Controller" description="Jump to Controller From View File">
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="C"/>

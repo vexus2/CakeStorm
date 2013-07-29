@@ -20,6 +20,7 @@ import com.intellij.ui.awt.RelativePoint;
 import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.DirectorySystem;
 import com.vexus2.cakestorm.lib.FileSystem;
+import com.vexus2.cakestorm.lib.OpenType;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ abstract public class Jumper {
   protected PsiDirectory directory;
   protected PsiFile psiFile;
 
-  protected Jumper(AnActionEvent e) throws Exception {
+  protected Jumper(AnActionEvent e, OpenType openType) throws Exception {
     VirtualFile currentFile = PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
     this.psiFile = LangDataKeys.PSI_FILE.getData(e.getDataContext());
     this.project = e.getProject();
@@ -52,6 +53,7 @@ abstract public class Jumper {
     directorySystem.setAppPath(fileSystem.getAppFile(currentFile));
     this.fileSystem.setProject(e.getProject());
     this.fileSystem.setDirectorySystem(directorySystem);
+    this.fileSystem.setOpenType(openType);
   }
 
 
