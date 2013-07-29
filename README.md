@@ -22,6 +22,16 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.4
+- Add Open File in New Tab to "SmartJump".
+- Default keymap is "C-; V" for Horizontal Open, "C-; H" for Vertical Open.
+
+### Version 0.3.3
+- Fixed PersistentStateComponent.
+
+### Version 0.3.2
+- Fixed bug.
+
 ### Version 0.3.1
 - Fixed bug when first boot.
 

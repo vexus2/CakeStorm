@@ -109,32 +109,29 @@ public class FileSystem {
       @Override
       public void actionPerformed(AnActionEvent e) {
         VirtualFile fileByUrl = virtualFileManager.refreshAndFindFileByUrl("file://" + e.getPresentation().getDescription());
-        FileEditorManagerEx fileEditorManagerEx = FileEditorManagerEx.getInstanceEx(e.getProject());
-        switch (openType) {
-          case VERTICAL:
-            fileEditorManagerEx.createSplitter(1, EditorWindow.DATA_KEY.getData(e.getDataContext()));
-            openNextTab(e.getDataContext(), fileByUrl);
-            break;
-          case HORIZONTAL:
-            fileEditorManagerEx.createSplitter(1, EditorWindow.DATA_KEY.getData(e.getDataContext()));
-            fileEditorManagerEx.changeSplitterOrientation();
-            openNextTab(e.getDataContext(), fileByUrl);
-            break;
-          case DEFAULT:
-            open(fileByUrl);
-            break;
+
+        if(openType == OpenType.DEFAULT) {
+          open(fileByUrl);
+        }else{
+          openNextTab(e.getProject(), e.getDataContext(), fileByUrl);
         }
       }
 
-      private void openNextTab(DataContext dataContext, VirtualFile file) {
+      private void openNextTab(Project project, DataContext dataContext, VirtualFile file) {
+        FileEditorManagerEx fileEditorManagerEx = FileEditorManagerEx.getInstanceEx(project);
+        fileEditorManagerEx.createSplitter(1, EditorWindow.DATA_KEY.getData(dataContext));
         final FileEditorManagerEx fileEditorManager = FileEditorManagerEx.getInstanceEx(project);
+        switch(openType) {
+          case HORIZONTAL:
+            fileEditorManagerEx.changeSplitterOrientation();
+        }
         final EditorWindow activeWindow = EditorWindow.DATA_KEY.getData(dataContext);
         if (activeWindow == null)
           return;
         final EditorWindow nextWindow = fileEditorManager.getNextWindow(activeWindow);
         if (nextWindow == null)
           return;
-        nextWindow.getManager().openFileImpl2(nextWindow, file, true);
+        nextWindow.getManager().openFileImpl2(nextWindow, file, false);
         nextWindow.closeAllExcept(file);
       }
     });

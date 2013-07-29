@@ -19,6 +19,16 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.4
+- SmartJumpに「ファイルを新しいタブで開く」機能を追加しました。
+- 水平分割で開く場合は"C-; H"、垂直分割で開く場合は"C-; V"で呼び出せます。
+
+### Version 0.3.3
+- 細かなパフォーマンス改善を行いました。
+
+### Version 0.3.2
+- 細かな不具合を修正しました。
+
 ### Version 0.3.1
 - 初回インストール時にNullPointerExceptionが発生する不具合を修正しました。
 
