@@ -1,5 +1,5 @@
 # CakeStorm
-CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://wwww.cakephp.org)開発者用のプラグインです。
+CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://wwww.cakephp.org)ユーザ用のプラグインです。
 
 主にファイル間のジャンプなどを便利にしてくれます。
 
@@ -21,6 +21,10 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.4.1
+- $this->layout等で指定されているlayoutsファイルへCtrl+Bからのジャンプを追加しました。
+- 特定ファイル内でSmartJumpを実行した際にNullpointerExceptionが発生していた箇所を修正しました。
+
 ### Version 0.4
 - SmartJumpに「ファイルを新しいタブで開く」機能を追加しました。
 - 水平分割で開く場合は"C-; H"、垂直分割で開く場合は"C-; V"で呼び出せます。

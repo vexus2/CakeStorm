@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.4</version>
+  <version>0.4.1</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
   <description><![CDATA[
@@ -21,6 +21,11 @@
 
     <change-notes><![CDATA[
           <html><body>
+          <p>version 0.4.1</p>
+          <ul>
+              <li>Add a references to Layouts files.</li>
+              <li>Fixed bug.</li>
+          </ul>
           <p>version 0.4</p>
           <ul>
               <li>Add Open File in New Tab to "SmartJump".</li>

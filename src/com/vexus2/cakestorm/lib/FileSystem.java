@@ -152,6 +152,8 @@ public class FileSystem {
 
     if (matcher.find()) {
       appDirPath = matcher.group(1);
+    }else {
+      return null;
     }
 
     return virtualFileManager.findFileByUrl(appDirPath);
@@ -189,7 +191,8 @@ public class FileSystem {
 
   public VirtualFile getVirtualFile(CakeIdentifier identifier) {
     String path = directorySystem.getCakeConfig().getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension());
-    return this.virtualFileBy(directorySystem.getAppPath().toString() + path);
+    VirtualFile appPath = directorySystem.getAppPath();
+    return (appPath == null) ? null : this.virtualFileBy(appPath.toString() + path);
   }
 
   public static String getAppPath(VirtualFile virtualFile) {

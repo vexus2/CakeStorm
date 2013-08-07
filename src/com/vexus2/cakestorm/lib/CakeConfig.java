@@ -15,7 +15,7 @@ import java.util.Map;
     reloadable = true,
     storages = {
         @Storage(id = "default", file = "$PROJECT_FILE$"),
-        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cake-config_settings.xml", scheme = StorageScheme.DIRECTORY_BASED)
+        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cakeconfig_settings.xml", scheme = StorageScheme.DIRECTORY_BASED)
     }
 )
 
@@ -101,6 +101,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
           put(CakeIdentifier.View, "/views/");
           put(CakeIdentifier.Model, "/models/");
           put(CakeIdentifier.Element, "elements/");
+          put(CakeIdentifier.Layout, "layouts/");
           put(CakeIdentifier.Helper, "/views/helpers/");
           put(CakeIdentifier.Component, "/controllers/components/");
           put(CakeIdentifier.Behavior, "/models/behaviors/");
@@ -125,6 +126,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
           put(CakeIdentifier.View, "/View/");
           put(CakeIdentifier.Model, "/Model/");
           put(CakeIdentifier.Element, "Elements/");
+          put(CakeIdentifier.Element, "Layout/");
           put(CakeIdentifier.Helper, "/View/Helper/");
           put(CakeIdentifier.Component, "/Controller/Component/");
           put(CakeIdentifier.Behavior, "/Model/Behavior/");

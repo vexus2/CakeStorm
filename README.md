@@ -24,6 +24,10 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.4.1
+- Add a references to Layouts files.
+- Fixed bug.
+
 ### Version 0.4
 - Add Open File in New Tab to "SmartJump".
 - Default keymap is "C-; V" for Horizontal Open, "C-; H" for Vertical Open.

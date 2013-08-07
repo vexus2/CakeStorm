@@ -38,7 +38,7 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
 
     if (phpClasses.isEmpty()) {
       CakeConfig cakeConfig = CakeConfig.getInstance(psiElement.getProject());
-      if(cakeConfig.isEmpty()) {
+      if (cakeConfig.isEmpty()) {
         VirtualFile tmpVirtualFile = psiElement.getContainingFile().getVirtualFile();
         cakeConfig.init(tmpVirtualFile, CakeIdentifier.getIdentifier(tmpVirtualFile));
       }
@@ -46,9 +46,7 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
       String filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
       VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
       if (virtualFile == null) {
-        controllerName = cakeConfig.cakeVersionAbsorption.get(CakeIdentifier.Element);
-        filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
-        virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
+        virtualFile = getVirtualFile(psiElement, jumpFileName, cakeConfig, CakeIdentifier.Element);
       }
       if (virtualFile != null) {
         PsiReference ref = new ClassReference(
@@ -86,6 +84,13 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
     }
     return psiReference;
 
+  }
+
+  private VirtualFile getVirtualFile(PsiElement psiElement, String jumpFileName, CakeConfig cakeConfig, CakeIdentifier identifier) {
+    String controllerName = cakeConfig.cakeVersionAbsorption.get(identifier);
+    String filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
+    VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
+    return (virtualFile == null) ? (identifier == CakeIdentifier.Element) ? getVirtualFile(psiElement, jumpFileName, cakeConfig, CakeIdentifier.Layout) : null : virtualFile;
   }
 
   public static TextRange getTextRange(String originalStr, String str) {

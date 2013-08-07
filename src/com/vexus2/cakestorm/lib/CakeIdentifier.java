@@ -23,6 +23,7 @@ public enum CakeIdentifier {
   Library,
   Element,
   FixtureFile,
+  Layout,
   Other;
 
   private CakeIdentifier() {
@@ -47,6 +48,7 @@ public enum CakeIdentifier {
     if (currentFileStr.matches(".*?(?i)shell.*?")) return CakeIdentifier.Shell;
     if (currentFileStr.matches(".*?(?i)task.*?")) return CakeIdentifier.Task;
     if (currentFileStr.matches(".*?(?i)lib.*?")) return CakeIdentifier.Library;
+    if (currentFileStr.matches(".*?(?i)lib.*?")) return CakeIdentifier.Layout;
     return null;
   }
 }
