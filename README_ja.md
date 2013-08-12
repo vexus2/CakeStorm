@@ -21,9 +21,12 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.4.2
+- シングルクォート文字列内でCtrl+Space押下時にNullpointerExxceptionが発生していた不具合を修正しました。
+
 ### Version 0.4.1
 - $this->layout等で指定されているlayoutsファイルへCtrl+Bからのジャンプを追加しました。
-- 特定ファイル内でSmartJumpを実行した際にNullpointerExceptionが発生していた箇所を修正しました。
+- 特定ファイル内でSmartJumpを実行した際にNullpointerExceptionが発生していた不具合を修正しました。
 
 ### Version 0.4
 - SmartJumpに「ファイルを新しいタブで開く」機能を追加しました。

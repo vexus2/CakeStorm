@@ -42,9 +42,12 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
         VirtualFile tmpVirtualFile = psiElement.getContainingFile().getVirtualFile();
         cakeConfig.init(tmpVirtualFile, CakeIdentifier.getIdentifier(tmpVirtualFile));
       }
-      String controllerName = cakeConfig.getBetweenDirectoryPath(psiElement.getContainingFile().getVirtualFile().getName());
+      VirtualFile virtualFile = psiElement.getContainingFile().getVirtualFile();
+      if (virtualFile == null)
+        return PsiReference.EMPTY_ARRAY;
+      String controllerName = cakeConfig.getBetweenDirectoryPath(virtualFile.getName());
       String filePath = cakeConfig.getPath(CakeIdentifier.View, controllerName, jumpFileName);
-      VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
+      virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(FileSystem.getAppPath(psiElement.getContainingFile().getVirtualFile()) + filePath);
       if (virtualFile == null) {
         virtualFile = getVirtualFile(psiElement, jumpFileName, cakeConfig, CakeIdentifier.Element);
       }
