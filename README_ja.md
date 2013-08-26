@@ -21,6 +21,9 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.4.3
+- 2つ以上の単語から構成されるController(ex: HogeFugaController)からrenderしているctpにジャンプ出来ない不具合を修正しました。
+
 ### Version 0.4.2
 - シングルクォート文字列内でCtrl+Space押下時にNullpointerExxceptionが発生していた不具合を修正しました。
 

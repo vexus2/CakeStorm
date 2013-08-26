@@ -21,6 +21,10 @@
 
     <change-notes><![CDATA[
           <html><body>
+          <p>version 0.4.3</p>
+          <ul>
+              <li>Fixed bug.</li>
+          </ul>
           <p>version 0.4.2</p>
           <ul>
               <li>Fixed bug.</li>
