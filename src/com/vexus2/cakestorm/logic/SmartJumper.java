@@ -38,7 +38,7 @@ public class SmartJumper extends Jumper {
   public void jump() {
     DefaultActionGroup group = new DefaultActionGroup();
 
-   addControllerGroups(group);
+    addControllerGroups(group);
     addViewGroups(group);
 
     for (CakeIdentifier identifier : CakeIdentifier.values()) {

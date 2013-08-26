@@ -61,12 +61,13 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
         return coreDir + betweenDirectory + fileNameWithoutExtension + cakeVersionAbsorption.get(CakeIdentifier.FileSeparator) + cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
       }
     } else {
+      String dir = coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension);
       if (cakeIdentifier.toString().matches(".*?(?i)(helper|behavior).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + cakeIdentifier.toString() + fileExtension;
+        return dir + cakeIdentifier.toString() + fileExtension;
       } else if (cakeIdentifier.toString().matches(".*?(?i)(fixture).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + cakeVersionAbsorption.get(CakeIdentifier.FileWordSeparator) + cakeVersionAbsorption.get(CakeIdentifier.FixtureFile) + fileExtension;
+        return dir + cakeVersionAbsorption.get(CakeIdentifier.FileWordSeparator) + cakeVersionAbsorption.get(CakeIdentifier.FixtureFile) + fileExtension;
       } else {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension) + fileExtension;
+        return dir + fileExtension;
       }
     }
   }
@@ -77,7 +78,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
         betweenDirectory = betweenDirectory.toLowerCase();
       }
     }
-    betweenDirectory = Utility.replaceAllIgnoreCase("Controller|_|\\.php", "", betweenDirectory);
+    betweenDirectory = Utility.replaceAllIgnoreCase("Controller|\\.php", "", betweenDirectory).replaceAll("_\\z", "");
     return betweenDirectory + "/";
   }
 
