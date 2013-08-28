@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.fileEditor.impl.EditorWindow;
-import com.intellij.openapi.fileEditor.impl.EditorWithProviderComposite;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
@@ -22,19 +21,20 @@ import java.util.regex.Pattern;
 
 public class FileSystem {
 
-  public static final String FILE_EXTENSION_PHP = ".php";
+  public static final String FILE_EXTENSION_PHP      = ".php";
   public static final String FILE_EXTENSION_TEMPLATE = ".ctp";
 
   private static VirtualFileManager virtualFileManager = null;
-  private DirectorySystem directorySystem;
+  private String pluginDir;
+  private       DirectorySystem directorySystem;
 
   private VirtualFile currentFile = null;
 
   // Current File
   private CakeIdentifier identifier = null;
-  private Project project;
+  private Project     project;
   private DataContext context;
-  private OpenType openType;
+  private OpenType    openType;
 
 
   public FileSystem(VirtualFile vf, DataContext context) {
@@ -42,6 +42,8 @@ public class FileSystem {
     this.context = context;
     this.currentFile = vf;
     this.identifier = CakeIdentifier.getIdentifier(vf);
+
+    this.pluginDir = FileSystem.getPluginDir(vf);
   }
 
   public int filePopup(ControllerMethod controllerMethod) {
@@ -92,7 +94,7 @@ public class FileSystem {
   public void createViewPopupActions(List<String> renderViews, DefaultActionGroup group, String betweenDirectory, String actionName) {
     Boolean grouped = false;
     for (String templateName : renderViews) {
-      String actionPath = directorySystem.getCakeConfig().getPath(CakeIdentifier.View, betweenDirectory, templateName);
+      String actionPath = directorySystem.getCakeConfig().getPath(CakeIdentifier.View, betweenDirectory, templateName, this.pluginDir);
       VirtualFile virtualFile = this.virtualFileBy(directorySystem.getAppPath().toString() + actionPath);
       if (virtualFile == null)
         continue;
@@ -190,7 +192,7 @@ public class FileSystem {
   }
 
   public VirtualFile getVirtualFile(CakeIdentifier identifier) {
-    String path = directorySystem.getCakeConfig().getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension());
+    String path = directorySystem.getCakeConfig().getPath(identifier, "", this.getCurrentFile().getNameWithoutExtension(), this.pluginDir);
     VirtualFile appPath = directorySystem.getAppPath();
     return (appPath == null) ? null : this.virtualFileBy(appPath.toString() + path);
   }
@@ -209,5 +211,18 @@ public class FileSystem {
 
   public void setOpenType(OpenType openType) {
     this.openType = openType;
+  }
+
+  public String getPluginDir() {
+    return pluginDir;
+  }
+
+
+  public static String getPluginDir(VirtualFile vf) {Pattern pattern = Pattern.compile(".*?app\\/plugin\\/(.*?)\\/", Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher(vf.toString());
+    if (matcher.find()) {
+      return matcher.group(1);
+    }
+    return null;
   }
 }

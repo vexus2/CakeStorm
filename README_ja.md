@@ -21,6 +21,10 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.5
+- "Plugin"ディレクトリ配下でのSmart Jumpをサポートしました。
+    - /app/Plugin/Example 配下のディレクトリ内でSmart JumpやGo to Decralationコマンドが利用可能になります。
+
 ### Version 0.4.3
 - 2つ以上の単語から構成されるController(ex: HogeFugaController)からrenderしているctpにジャンプ出来ない不具合を修正しました。
 

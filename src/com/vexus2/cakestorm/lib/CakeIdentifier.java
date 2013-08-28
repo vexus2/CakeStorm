@@ -9,6 +9,7 @@ public enum CakeIdentifier {
   Helper,
   Component,
   Behavior,
+  Plugin,
   Shell,
   Task,
   ControllerTest,
@@ -45,6 +46,7 @@ public enum CakeIdentifier {
     if (currentFileStr.matches(".*?(?i)model.*?")) return CakeIdentifier.Model;
     if (currentFileStr.matches(".*?(?i)helper.*?")) return CakeIdentifier.Helper;
     if (currentFileStr.matches(".*?(?i)view.*?")) return CakeIdentifier.View;
+    if (currentFileStr.matches(".*?(?i)plugin.*?")) return CakeIdentifier.Plugin;
     if (currentFileStr.matches(".*?(?i)shell.*?")) return CakeIdentifier.Shell;
     if (currentFileStr.matches(".*?(?i)task.*?")) return CakeIdentifier.Task;
     if (currentFileStr.matches(".*?(?i)lib.*?")) return CakeIdentifier.Library;

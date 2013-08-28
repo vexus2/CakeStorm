@@ -24,6 +24,9 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.5
+- Support Smart Jump and Go to Declaration in "Plugin" Directory. (ex: /app/Plugin/Example/Controller/ExampleController)
+
 ### Version 0.4.3
 - Fixed bug.
 

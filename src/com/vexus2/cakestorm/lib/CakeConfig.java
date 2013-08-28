@@ -15,7 +15,7 @@ import java.util.Map;
     reloadable = true,
     storages = {
         @Storage(id = "default", file = "$PROJECT_FILE$"),
-        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cakeconfig_settings.xml", scheme = StorageScheme.DIRECTORY_BASED)
+        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cake_config_setting_v0_5.xml", scheme = StorageScheme.DIRECTORY_BASED)
     }
 )
 
@@ -51,17 +51,18 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
     }
   }
 
-  public String getPath(CakeIdentifier cakeIdentifier, String betweenDirectory, String fileNameWithoutExtension) {
+  public String getPath(CakeIdentifier cakeIdentifier, String betweenDirectory, String fileNameWithoutExtension, String pluginDir) {
     String fileExtension = (cakeIdentifier == CakeIdentifier.View) ? FileSystem.FILE_EXTENSION_TEMPLATE : FileSystem.FILE_EXTENSION_PHP;
     String coreDir = cakeVersionAbsorption.get(cakeIdentifier);
     if (cakeIdentifier.toString().matches(".*?(?i)test.*?")) {
+      String dir = ((pluginDir != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + pluginDir : "" ) + coreDir + betweenDirectory;
       if (cakeIdentifier.toString().matches(".*?(?i)(helper|behavior).*?")) {
-        return coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("helper|behavior", "", fileNameWithoutExtension) + cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
+        return dir + Utility.replaceAllIgnoreCase("helper|behavior", "", fileNameWithoutExtension) + cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
       } else {
-        return coreDir + betweenDirectory + fileNameWithoutExtension + cakeVersionAbsorption.get(CakeIdentifier.FileSeparator) + cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
+        return dir + betweenDirectory + fileNameWithoutExtension + cakeVersionAbsorption.get(CakeIdentifier.FileSeparator) + cakeVersionAbsorption.get(CakeIdentifier.TestFile) + fileExtension;
       }
     } else {
-      String dir = coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension);
+      String dir = ((pluginDir != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + pluginDir : "" ) + coreDir + betweenDirectory + Utility.replaceAllIgnoreCase("_?test|_?fixture|\\.", "", fileNameWithoutExtension);
       if (cakeIdentifier.toString().matches(".*?(?i)(helper|behavior).*?")) {
         return dir + cakeIdentifier.toString() + fileExtension;
       } else if (cakeIdentifier.toString().matches(".*?(?i)(fixture).*?")) {
@@ -106,6 +107,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
           put(CakeIdentifier.Helper, "/views/helpers/");
           put(CakeIdentifier.Component, "/controllers/components/");
           put(CakeIdentifier.Behavior, "/models/behaviors/");
+          put(CakeIdentifier.Plugin, "plugins/");
           put(CakeIdentifier.Shell, "/vendors/shell");
           put(CakeIdentifier.Task, "/vendors/Shell/Task");
           put(CakeIdentifier.ControllerTest, "/tests/cases/controllers/");
@@ -127,10 +129,11 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
           put(CakeIdentifier.View, "/View/");
           put(CakeIdentifier.Model, "/Model/");
           put(CakeIdentifier.Element, "Elements/");
-          put(CakeIdentifier.Element, "Layout/");
+          put(CakeIdentifier.Layout, "Layouts/");
           put(CakeIdentifier.Helper, "/View/Helper/");
           put(CakeIdentifier.Component, "/Controller/Component/");
           put(CakeIdentifier.Behavior, "/Model/Behavior/");
+          put(CakeIdentifier.Plugin, "Plugin/");
           put(CakeIdentifier.Shell, "/Vendor/Shell");
           put(CakeIdentifier.Task, "/Vendor/Shell/Task");
           put(CakeIdentifier.ControllerTest, "/Test/Case/Controller/");
