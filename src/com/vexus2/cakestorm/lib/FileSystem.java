@@ -25,8 +25,8 @@ public class FileSystem {
   public static final String FILE_EXTENSION_TEMPLATE = ".ctp";
 
   private static VirtualFileManager virtualFileManager = null;
-  private String pluginDir;
-  private       DirectorySystem directorySystem;
+  private String          pluginDir;
+  private DirectorySystem directorySystem;
 
   private VirtualFile currentFile = null;
 
@@ -82,11 +82,11 @@ public class FileSystem {
 
   public void showPopup(DefaultActionGroup group) {
     final ListPopup popup = JBPopupFactory.getInstance()
-        .createActionGroupPopup("Open File",
-            group,
-            context,
-            JBPopupFactory.ActionSelectionAid.NUMBERING,
-            true);
+                                          .createActionGroupPopup("Open File",
+                                                                  group,
+                                                                  context,
+                                                                  JBPopupFactory.ActionSelectionAid.NUMBERING,
+                                                                  true);
 
     popup.showCenteredInCurrentWindow(project);
   }
@@ -112,9 +112,9 @@ public class FileSystem {
       public void actionPerformed(AnActionEvent e) {
         VirtualFile fileByUrl = virtualFileManager.refreshAndFindFileByUrl("file://" + e.getPresentation().getDescription());
 
-        if(openType == OpenType.DEFAULT) {
+        if (openType == OpenType.DEFAULT) {
           open(fileByUrl);
-        }else{
+        } else {
           openNextTab(e.getProject(), e.getDataContext(), fileByUrl);
         }
       }
@@ -123,7 +123,7 @@ public class FileSystem {
         FileEditorManagerEx fileEditorManagerEx = FileEditorManagerEx.getInstanceEx(project);
         fileEditorManagerEx.createSplitter(1, EditorWindow.DATA_KEY.getData(dataContext));
         final FileEditorManagerEx fileEditorManager = FileEditorManagerEx.getInstanceEx(project);
-        switch(openType) {
+        switch (openType) {
           case HORIZONTAL:
             fileEditorManagerEx.changeSplitterOrientation();
         }
@@ -154,7 +154,7 @@ public class FileSystem {
 
     if (matcher.find()) {
       appDirPath = matcher.group(1);
-    }else {
+    } else {
       return null;
     }
 
@@ -218,7 +218,8 @@ public class FileSystem {
   }
 
 
-  public static String getPluginDir(VirtualFile vf) {Pattern pattern = Pattern.compile(".*?app\\/plugin\\/(.*?)\\/", Pattern.CASE_INSENSITIVE);
+  public static String getPluginDir(VirtualFile vf) {
+    Pattern pattern = Pattern.compile(".*?app\\/plugin.?\\/(.*?)\\/", Pattern.CASE_INSENSITIVE);
     Matcher matcher = pattern.matcher(vf.toString());
     if (matcher.find()) {
       return matcher.group(1);
