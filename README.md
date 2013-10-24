@@ -24,6 +24,9 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.5.2
+- Fixed bug for PhpStorm7
+
 ### Version 0.5.1
 - Fixed "Plugin" jump bug for CakePHP 1.3.X
 

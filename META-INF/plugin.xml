@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.5</version>
+  <version>0.5.2</version>
   <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
 
   <description><![CDATA[
@@ -21,6 +21,10 @@
 
     <change-notes><![CDATA[
           <html><body>
+          <p>version 0.5.2</p>
+          <ul>
+              <li>Fixed bug for PhpStorm7</li>
+          </ul>
           <p>version 0.5.1</p>
           <ul>
               <li>Fixed "Plugin" jump bug for CakePHP 1.3.X</li>

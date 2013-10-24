@@ -59,7 +59,7 @@ public class SmartJumper extends Jumper {
       // view -> controller
       Map<CakeIdentifier, String> cakeVersionAbsorption = fileSystem.getDirectorySystem().getCakeConfig().cakeVersionAbsorption;
       Pattern pattern = Pattern.compile(fileSystem.getDirectorySystem().getCanonicalAppPath()
-          + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : null)
+          + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
           + cakeVersionAbsorption.get(CakeIdentifier.View)
           + "(.*?)/");
       Matcher matcher = pattern.matcher(fileSystem.getCurrentFile().getPath());
@@ -70,7 +70,7 @@ public class SmartJumper extends Jumper {
       }
 
       VirtualFile virtualFile = fileSystem.virtualFileBy(directorySystem.getAppPath().toString()
-          + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : null)
+          + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
           + cakeVersionAbsorption.get(CakeIdentifier.Controller)
           + path
           + FileSystem.FILE_EXTENSION_PHP);

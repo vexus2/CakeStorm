@@ -73,7 +73,7 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
           virtualFile = getVirtualFile(psiElement, jumpFileName, cakeConfig, CakeIdentifier.Element);
         }
       }
-      if (virtualFile != null) {
+      if (virtualFile != null && textRange != null) {
         PsiReference ref = new ClassReference(
             virtualFile,
             cursorText.substring(textRange.getStartOffset(), textRange.getEndOffset()),

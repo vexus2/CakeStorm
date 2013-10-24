@@ -76,7 +76,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
   public String getBetweenDirectoryPath(String betweenDirectory) {
     if (betweenDirectory != null) {
       if (cakeVersion == 1) {
-        betweenDirectory = betweenDirectory.toLowerCase();
+        betweenDirectory = Utility.camelToSnake(betweenDirectory);
       }
     }
     betweenDirectory = Utility.replaceAllIgnoreCase("Controller|\\.php", "", betweenDirectory).replaceAll("_\\z", "");
