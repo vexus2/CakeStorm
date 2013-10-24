@@ -25,7 +25,7 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
  - PhpStorm7向けにいくつかの不具合を修正しました。
 
 ### Version 0.5.1
-- CakePHP1.3計で"Plugin"ディレクトリ内でのSmart Jumpが動作しなかった不具合を修正しました。
+- CakePHP1.3系で"Plugin"ディレクトリ内でのSmart Jumpが動作しなかった不具合を修正しました。
 
 ### Version 0.5
 - "Plugin"ディレクトリ配下でのSmart Jumpをサポートしました。
@@ -35,7 +35,7 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 - 2つ以上の単語から構成されるController(ex: HogeFugaController)からrenderしているctpにジャンプ出来ない不具合を修正しました。
 
 ### Version 0.4.2
-- シングルクォート文字列内でCtrl+Space押下時にNullpointerExxceptionが発生していた不具合を修正しました。
+- シングルクォート文字列内でCtrl+Space押下時にNullpointerExceptionが発生していた不具合を修正しました。
 
 ### Version 0.4.1
 - $this->layout等で指定されているlayoutsファイルへCtrl+Bからのジャンプを追加しました。
