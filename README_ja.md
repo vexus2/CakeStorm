@@ -21,6 +21,9 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.5.3
+ - 特定条件下でNullpointerExceptionが頻発する不具合を修正しました。
+
 ### Version 0.5.2
  - PhpStorm7向けにいくつかの不具合を修正しました。
 

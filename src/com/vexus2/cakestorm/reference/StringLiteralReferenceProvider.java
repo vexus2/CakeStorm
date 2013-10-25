@@ -89,7 +89,7 @@ public class StringLiteralReferenceProvider extends PsiReferenceProvider {
     ArrayList<PsiReference> refList = new ArrayList<PsiReference>();
 
     for (PhpClass phpClass : phpClasses) {
-      if (phpClass != null) {
+      if (phpClass != null && textRange != null) {
         PsiReference ref = new ClassReference(
             phpClass.getContainingFile().getVirtualFile(),
             cursorText.substring(textRange.getStartOffset(), textRange.getEndOffset()),
