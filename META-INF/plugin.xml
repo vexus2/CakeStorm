@@ -15,7 +15,7 @@
                 <li>Ctrl+; H - CakePHP SmartJump with Horizontal Tab</li>
             </ul>
 
-            For more details please visit GitHub page <a href="https://github.com/nanapi/cake-storm">https://github.com/nanapi/cake-storm</a>
+            For more details please visit GitHub page <a href="https://github.com/vexus2/cake-storm">https://github.com/vexus2/cake-storm</a>
          </body></html>
 ]]></description>
 
@@ -117,54 +117,6 @@
       <action id="CakeStorm.VerticalSmartJump" class="com.vexus2.cakestorm.ide.Actions$VerticalSmartJump"
               text="CakePHP SmartJump with Vertical Tab" description="View a full list that can be jump">
           <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="V"/>
-      </action>
-      <action id="CakeStorm.JumpToController" class="com.vexus2.cakestorm.ide.Actions$JumpToControllerFromView"
-              text="Jump to Controller" description="Jump to Controller From View File">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="C"/>
-      </action>
-      <action id="CakeStorm.JumpToControllerFromTest" class="com.vexus2.cakestorm.ide.Actions$JumpToControllerFromTest"
-              text="Jump To Controller From Test" description="Jump To Controller From Test">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="ctrl c"/>
-      </action>
-      <action id="CakeStorm.JumpToModelFromFixture" class="com.vexus2.cakestorm.ide.Actions$JumpToModelFromFixture"
-              text="Jump to Model From Fixture" description="Jump To Model From Fixture">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="M"/>
-      </action>
-      <action id="CakeStorm.JumpToModelFromTest" class="com.vexus2.cakestorm.ide.Actions$JumpToModelFromTest"
-              text="Jump to Model From Test" description="Jump To Model From Test">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="ctrl M"/>
-      </action>
-     <action id="CakeStorm.JumpToComponent" class="com.vexus2.cakestorm.ide.Actions$JumpToComponent"
-              text="Jump to Component from Test" description="Jump to Component from Test">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="P"/>
-      </action>
-      <action id="CakeStorm.JumpToBehavior" class="com.vexus2.cakestorm.ide.Actions$JumpToBehavior"
-              text="Jump to Behavior from Test" description="Jump to Behavior from Test">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="B"/>
-      </action>
-      <action id="CakeStorm.JumpToHelper" class="com.vexus2.cakestorm.ide.Actions$JumpToHelper"
-              text="Jump to Helper from Test" description="">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="H"/>
-      </action>
-      <action id="CakeStorm.JumpToFixture" class="com.vexus2.cakestorm.ide.Actions$JumpToFixture"
-              text="Jump to Fixture from Model" description="">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="F"/>
-      </action>
-      <action id="CakeStorm.SmartTestJump" class="com.vexus2.cakestorm.ide.Actions$JumpToTest"
-              text="SmartTestJump" description="Jump to Test File">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="ctrl t"/>
-      </action>
-      <action id="CakeStorm.JumpToComponentTest" class="com.vexus2.cakestorm.ide.Actions$JumpToComponent"
-              text="Jump to ComponentTest" description="Jump To ComponentTest From Component">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="ctrl p"/>
-      </action>
-      <action id="CakeStorm.JumpToBehaviorTest" class="com.vexus2.cakestorm.ide.Actions$JumpToBehavior"
-              text="Jump to BehaviorTest" description="Jump to BehaviorTest from Behavior">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="ctrl b"/>
-      </action>
-      <action id="CakeStorm.JumpToHelperTest" class="com.vexus2.cakestorm.ide.Actions$JumpToHelper"
-              text="Jump to HelperTest" description="Jump to HelperTest From Helper">
-          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="ctrl h"/>
       </action>
   </actions>
 
