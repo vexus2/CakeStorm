@@ -94,6 +94,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
     return name;
   }
 
+  // TODO: add version3 file path
   private void setDifferences(int version) {
     HashMap<CakeIdentifier, String> identifierStringHashMap;
     if (version == 1) {
@@ -158,6 +159,7 @@ public class CakeConfig implements PersistentStateComponent<CakeConfig> {
       identifier = CakeIdentifier.Other;
     }
     String currentFileName = vf.toString();
+    //TODO: set version = 3 when identifier include 'src' directory
     int version = 0;
     switch (identifier) {
       case Controller:
