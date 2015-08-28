@@ -3,11 +3,11 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 
 主にファイル間のジャンプなどを便利にしてくれます。
 
-![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
+![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation1.gif)
 
-![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation2.gif)
+![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation2.gif)
 
-![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation3.gif)
+![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation3.gif)
 
 ## 動作環境
 - PhpStorm 6.0.0+ or IntelliJ Idea 12.0+(PHP Plugin必須)
@@ -106,5 +106,9 @@ PhpStormのデフォルト機能、"Go to Decralation"で移動出来ます。
 
 - バグってて動かないんだけど？
 
-[Twitter](https://twitter.com/vexus2)か、[issue](https://github.com/nanapi/cake-storm/issues)で報告して頂けると助かります！
+[Twitter](https://twitter.com/vexus2)か、[issue](https://github.com/vexus2/cake-storm/issues)で報告して頂けると助かります！
 修正してPull Requestも大歓迎です。:grin:
+
+- Viewファイル(.ctp)がコードハイライトされない
+プラグインの機能ではサポートしていません。[Preferences] -> [Editor] -> [File Types] -> [PHP] から `*.ctp` を追加することでPHPファイルとして認識されます。
+![readme](https://github.com/vexus2/cake-storm/raw/master/images/readme1.gif)
