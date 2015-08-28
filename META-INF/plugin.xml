@@ -1,0 +1,128 @@
+<idea-plugin version="2">
+  <id>com.vexus2.cakestorm</id>
+  <name>CakeStorm</name>
+  <version>0.5.3</version>
+  <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
+
+  <description><![CDATA[
+          <html><body>
+            CakeStorm is a PHPStorm plugin for CakePHP developers. <br>Provides the ability to easily jump between files.
+            <br><br>
+            <ul>
+                <li>Ctrl+B(Ctrl+Click) - Go to declaration</li>
+                <li>Ctrl+; S - CakePHP SmartJump</li>
+                <li>Ctrl+; V - CakePHP SmartJump with Vertical Tab</li>
+                <li>Ctrl+; H - CakePHP SmartJump with Horizontal Tab</li>
+            </ul>
+
+            For more details please visit GitHub page <a href="https://github.com/vexus2/cake-storm">https://github.com/vexus2/cake-storm</a>
+         </body></html>
+]]></description>
+
+    <change-notes><![CDATA[
+          <html><body>
+          <p>version 0.5.3</p>
+          <ul>
+              <li>Fixed bug.</li>
+          </ul>
+          <p>version 0.5.2</p>
+          <ul>
+              <li>Fixed bug for PhpStorm7</li>
+          </ul>
+          <p>version 0.5.1</p>
+          <ul>
+              <li>Fixed "Plugin" jump bug for CakePHP 1.3.X</li>
+          </ul>
+          <p>version 0.5</p>
+          <ul>
+              <li>Support Smart Jump and Go to Declaration in "Plugin" Directory. (ex: /app/Plugin/Example/Controller/ExampleController)</li>
+          </ul>
+          <p>version 0.4.3</p>
+          <ul>
+              <li>Fixed bug.</li>
+          </ul>
+          <p>version 0.4.2</p>
+          <ul>
+              <li>Fixed bug.</li>
+          </ul>
+          <p>version 0.4.1</p>
+          <ul>
+              <li>Add a references to Layouts files.</li>
+              <li>Fixed bug.</li>
+          </ul>
+          <p>version 0.4</p>
+          <ul>
+              <li>Add Open File in New Tab to "SmartJump".</li>
+              <li>Default keymap is "C-; V" for Horizontal Open, "C-; H" for Vertical Open.</li>
+          </ul>
+          <p>version 0.3.3</p>
+          <ul>
+              <li>Fixed PersistentStateComponent.</li>
+          </ul>
+
+          <p>version 0.3.2</p>
+          <ul>
+              <li>Fixed bug.</li>
+          </ul>
+
+          <p>version 0.3.1</p>
+          <ul>
+              <li>Fixed bug when first boot.</li>
+          </ul>
+
+          <p>version 0.3</p>
+          <ul>
+              <li>Add a references to Model, View, to the Element from any files.</li>
+          </ul>
+
+          <p>version 0.2</p>
+          <ul>
+              <li>The name of SmartJump has been changed to CakePHP SmartJump.</li>
+              <li>Add View => Element jump for CakePHP SmartJump.</li>
+              <li>CakePHP SmartJump will display a pop-up in any scene.</li>
+              <li>CakePHP SmartJump can jump to Fixture <=> Model <=> ModelTestCase.
+              <li>Modified to display at the top of the list the current action.</li>
+              <li>Fixed a bug in when arguments are included in the 'render'.</li>
+          </ul>
+
+          <p>version 0.1</p>
+          <ul>
+              <li>initial release.</li>
+          </ul>
+         </body></html>
+]]> </change-notes>
+
+  <idea-version since-build="107.105"/>
+
+  <depends>com.jetbrains.php</depends>
+  <depends>com.intellij.modules.platform</depends>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+      <action id="CakeStorm.SmartJump" class="com.vexus2.cakestorm.ide.Actions$SmartJump"
+              text="CakePHP SmartJump" description="View a full list that can be jump">
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="S"/>
+      </action>
+      <action id="CakeStorm.HorizontalSmartJump" class="com.vexus2.cakestorm.ide.Actions$HorizontalSmartJump"
+              text="CakePHP SmartJump with Horizontal Tab" description="View a full list that can be jump">
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="H"/>
+      </action>
+      <action id="CakeStorm.VerticalSmartJump" class="com.vexus2.cakestorm.ide.Actions$VerticalSmartJump"
+              text="CakePHP SmartJump with Vertical Tab" description="View a full list that can be jump">
+          <keyboard-shortcut keymap="$default" first-keystroke="ctrl SEMICOLON" second-keystroke="V"/>
+      </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+      <projectService serviceInterface="com.vexus2.cakestorm.lib.CakeConfig" serviceImplementation="com.vexus2.cakestorm.lib.CakeConfig"/>
+      <!--<completion.contributor language="PHP" implementationClass="com.vexus2.cakestorm.reference.CakeStormCompletionContributor"/>-->
+      <psi.referenceContributor implementation="com.vexus2.cakestorm.reference.CakeStormReferenceContributor"/>
+  </extensions>
+</idea-plugin>
