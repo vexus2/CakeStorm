@@ -74,25 +74,11 @@ It provides the ability to easily jump between files.
 | Current File | Command | Jump to |
 | --- | --- | --- |
 | Controller|C-; s| View |
-| Controller|C-; C-c| ControllerTestCase |
-| Model|C-; C-m| ModelTestCase |
-| Model|C-; C-f| Fixture |
 | View |C-; s| Controller |
-| View |C-; c| Controller |
 | Component |C-; s| ComponentTestCase |
-| Component |C-; C-p| ComponentTestCase |
 | Behavior |C-; s| BehaviorTestCase |
-| Behavior |C-; C-b| BehaviorTestCase |
 | Helper |C-; s| HelperTestCase |
-| Helper |C-; C-h| HelperTestCase |
 | Fixture |C-; s | Model |
-| Fixture |C-; m | Model |
-| ControllerTestCase |C-; h| Controller |
-| ModelTestCase |C-; m| Model |
-| ComponentTestCase |C-; p| Component |
-| BehaviorTestCase |C-; b| Behavior |
-| HelperTestCase |C-; h| Helper |
-| Any File | C-; C-t | Any Test File |
 
 ## FAQ
 - I can not remember all those commands, there are too many.
