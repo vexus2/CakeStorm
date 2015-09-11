@@ -3,9 +3,6 @@ package com.vexus2.cakestorm.logic;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.jetbrains.php.lang.psi.PhpPsiUtil;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.FileSystem;
@@ -33,7 +30,8 @@ public class SmartJumper extends Jumper {
       if (phpClass != null) {
         this.controllerMethod = new ControllerMethod(phpClass, editor.getCaretModel().getOffset());
       }
-    } else if (this.fileSystem.getIdentifier() == CakeIdentifier.View) {
+    } else if (this.fileSystem.getIdentifier() == CakeIdentifier.View
+        || this.fileSystem.getIdentifier() == CakeIdentifier.Template) {
       this.viewMethod = new ViewMethod(psiFile);
     }
   }
@@ -52,7 +50,7 @@ public class SmartJumper extends Jumper {
       VirtualFile virtualFile = fileSystem.getVirtualFile(identifier);
       if (virtualFile != null) {
         group.addSeparator(identifier.toString());
-        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppFile(virtualFile).getPath().toString(), ""), virtualFile);
+        fileSystem.addGroupChild(group, virtualFile.getPath().replaceAll(fileSystem.getAppFile(virtualFile).getPath(), ""), virtualFile);
       }
     }
     fileSystem.showPopup(group);
@@ -63,9 +61,10 @@ public class SmartJumper extends Jumper {
     if(viewMethod == null) return;
     // view -> controller
     Map<CakeIdentifier, String> cakeVersionAbsorption = fileSystem.getDirectorySystem().getCakeConfig().cakeVersionAbsorption;
+    String identifier = (fileSystem.getDirectorySystem().getCakeConfig().cakeVersion == 3) ? cakeVersionAbsorption.get(CakeIdentifier.Template) : cakeVersionAbsorption.get(CakeIdentifier.View);
     Pattern pattern = Pattern.compile(fileSystem.getDirectorySystem().getCanonicalAppPath()
         + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
-        + cakeVersionAbsorption.get(CakeIdentifier.View)
+        + identifier
         + "(.*?)/");
     Matcher matcher = pattern.matcher(fileSystem.getCurrentFile().getPath());
     String path = "";
@@ -81,7 +80,7 @@ public class SmartJumper extends Jumper {
         + FileSystem.FILE_EXTENSION_PHP);
     if (virtualFile != null) {
       group.addSeparator(CakeIdentifier.Controller.toString());
-      fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppFile(virtualFile).getPath().toString(), ""), virtualFile);
+      fileSystem.addGroupChild(group, virtualFile.getPath().replaceAll(fileSystem.getAppFile(virtualFile).getPath(), ""), virtualFile);
     }
 
     // view -> element
