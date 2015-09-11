@@ -1,8 +1,8 @@
 <idea-plugin version="2">
   <id>com.vexus2.cakestorm</id>
   <name>CakeStorm</name>
-  <version>0.5.3</version>
-  <vendor email="hikaru.tooyama@gmail.com" url="http://vexus2.com/">Vexus2</vendor>
+  <version>0.6.0</version>
+  <vendor email="hikaru.tooyama@gmail.com" url="https://github.com/vexus2">Vexus2</vendor>
 
   <description><![CDATA[
           <html><body>
@@ -21,6 +21,10 @@
 
     <change-notes><![CDATA[
           <html><body>
+          <p>version 0.6.0</p>
+          <ul>
+              <li>CakePHP3 Support.</li>
+          </ul>
           <p>version 0.5.3</p>
           <ul>
               <li>Fixed bug.</li>

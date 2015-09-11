@@ -24,6 +24,9 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.6.0
+- CakePHP3 Support.
+
 ### Version 0.5.3
 - Fixed bug.
 

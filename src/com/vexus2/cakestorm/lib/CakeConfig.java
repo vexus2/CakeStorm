@@ -15,7 +15,7 @@ import java.util.Map;
     reloadable = true,
     storages = {
         @Storage(id = "default", file = "$PROJECT_FILE$"),
-        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cake_config_setting_v0_5.xml", scheme = StorageScheme.DIRECTORY_BASED)
+        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/cake_config_setting_v0_6.xml", scheme = StorageScheme.DIRECTORY_BASED)
     }
 )
 

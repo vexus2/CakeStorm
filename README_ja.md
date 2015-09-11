@@ -21,6 +21,9 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.6.0
+- CakePHP3に対応しました。
+
 ### Version 0.5.3
  - 特定条件下でNullpointerExceptionが頻発する不具合を修正しました。
 
@@ -72,25 +75,11 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 | Current File | Command | Jump to |
 | --- | --- | --- |
 | Controller|C-; s| View |
-| Controller|C-; C-c| ControllerTestCase |
-| Model|C-; C-m| ModelTestCase |
-| Model|C-; C-f| Fixture |
 | View |C-; s| Controller |
-| View |C-; c| Controller |
 | Component |C-; s| ComponentTestCase |
-| Component |C-; C-p| ComponentTestCase |
 | Behavior |C-; s| BehaviorTestCase |
-| Behavior |C-; C-b| BehaviorTestCase |
 | Helper |C-; s| HelperTestCase |
-| Helper |C-; C-h| HelperTestCase |
 | Fixture |C-; s | Model |
-| Fixture |C-; m | Model |
-| ControllerTestCase |C-; h| Controller |
-| ModelTestCase |C-; m| Model |
-| ComponentTestCase |C-; p| Component |
-| BehaviorTestCase |C-; b| Behavior |
-| HelperTestCase |C-; h| Helper |
-| Any File | C-; C-t | Any Test File |
 
 ## FAQ
 - コマンドが多すぎて覚えられないんですけど？
