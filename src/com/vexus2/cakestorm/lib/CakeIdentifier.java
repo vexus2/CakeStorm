@@ -6,6 +6,9 @@ public enum CakeIdentifier {
   Controller,
   View,
   Model,
+  Template,
+  Table,
+  Entity,
   Helper,
   Component,
   Behavior,
@@ -13,6 +16,7 @@ public enum CakeIdentifier {
   Shell,
   Task,
   ControllerTest,
+  TableTest,
   ModelTest,
   BehaviorTest,
   ComponentTest,
@@ -38,19 +42,23 @@ public enum CakeIdentifier {
       if (currentFileStr.matches(".*?(?i)behavior.*?")) return CakeIdentifier.BehaviorTest;
       if (currentFileStr.matches(".*?(?i)model.*?")) return CakeIdentifier.ModelTest;
       if (currentFileStr.matches(".*?(?i)helper.*?")) return CakeIdentifier.HelperTest;
+      if (currentFileStr.matches(".*?(?i)table.*?")) return CakeIdentifier.TableTest;
     }
     if (currentFileStr.matches(".*?(?i)component.*?")) return CakeIdentifier.Component;
     if (currentFileStr.matches(".*?(?i)controller.*?")) return CakeIdentifier.Controller;
+    if (currentFileStr.matches(".*?Template.*?")) return CakeIdentifier.Template;
     if (currentFileStr.matches(".*?(?i)fixture.*?")) return CakeIdentifier.Fixture;
     if (currentFileStr.matches(".*?(?i)behavior.*?")) return CakeIdentifier.Behavior;
+    if (currentFileStr.matches(".*?(?i)table.*?")) return CakeIdentifier.Table;
     if (currentFileStr.matches(".*?(?i)model.*?")) return CakeIdentifier.Model;
+    if (currentFileStr.matches(".*?(?i)entity.*?")) return CakeIdentifier.Entity;
     if (currentFileStr.matches(".*?(?i)helper.*?")) return CakeIdentifier.Helper;
     if (currentFileStr.matches(".*?(?i)view.*?")) return CakeIdentifier.View;
     if (currentFileStr.matches(".*?(?i)plugin.*?")) return CakeIdentifier.Plugin;
     if (currentFileStr.matches(".*?(?i)shell.*?")) return CakeIdentifier.Shell;
     if (currentFileStr.matches(".*?(?i)task.*?")) return CakeIdentifier.Task;
     if (currentFileStr.matches(".*?(?i)lib.*?")) return CakeIdentifier.Library;
-    if (currentFileStr.matches(".*?(?i)lib.*?")) return CakeIdentifier.Layout;
+    if (currentFileStr.matches(".*?(?i)layout.*?")) return CakeIdentifier.Layout;
     return null;
   }
 }

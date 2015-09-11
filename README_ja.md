@@ -3,11 +3,11 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 
 主にファイル間のジャンプなどを便利にしてくれます。
 
-![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation1.gif)
+![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation1.gif)
 
-![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation2.gif)
+![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation2.gif)
 
-![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation3.gif)
+![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation3.gif)
 
 ## 動作環境
 - PhpStorm 6.0.0+ or IntelliJ Idea 12.0+(PHP Plugin必須)
@@ -21,6 +21,9 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 5. IDEの再起動を聞かれるので[Restart]を押下
 
 ## 更新履歴
+### Version 0.6.0
+- CakePHP3に対応しました。
+
 ### Version 0.5.3
  - 特定条件下でNullpointerExceptionが頻発する不具合を修正しました。
 
@@ -72,25 +75,11 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 | Current File | Command | Jump to |
 | --- | --- | --- |
 | Controller|C-; s| View |
-| Controller|C-; C-c| ControllerTestCase |
-| Model|C-; C-m| ModelTestCase |
-| Model|C-; C-f| Fixture |
 | View |C-; s| Controller |
-| View |C-; c| Controller |
 | Component |C-; s| ComponentTestCase |
-| Component |C-; C-p| ComponentTestCase |
 | Behavior |C-; s| BehaviorTestCase |
-| Behavior |C-; C-b| BehaviorTestCase |
 | Helper |C-; s| HelperTestCase |
-| Helper |C-; C-h| HelperTestCase |
 | Fixture |C-; s | Model |
-| Fixture |C-; m | Model |
-| ControllerTestCase |C-; h| Controller |
-| ModelTestCase |C-; m| Model |
-| ComponentTestCase |C-; p| Component |
-| BehaviorTestCase |C-; b| Behavior |
-| HelperTestCase |C-; h| Helper |
-| Any File | C-; C-t | Any Test File |
 
 ## FAQ
 - コマンドが多すぎて覚えられないんですけど？
@@ -106,5 +95,9 @@ PhpStormのデフォルト機能、"Go to Decralation"で移動出来ます。
 
 - バグってて動かないんだけど？
 
-[Twitter](https://twitter.com/vexus2)か、[issue](https://github.com/nanapi/cake-storm/issues)で報告して頂けると助かります！
+[Twitter](https://twitter.com/vexus2)か、[issue](https://github.com/vexus2/cake-storm/issues)で報告して頂けると助かります！
 修正してPull Requestも大歓迎です。:grin:
+
+- Viewファイル(.ctp)がコードハイライトされない
+プラグインの機能ではサポートしていません。[Preferences] -> [Editor] -> [File Types] -> [PHP] から `*.ctp` を追加することでPHPファイルとして認識されます。
+![readme](https://github.com/vexus2/cake-storm/raw/master/images/readme1.gif)

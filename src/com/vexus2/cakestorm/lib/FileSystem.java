@@ -149,11 +149,11 @@ public class FileSystem {
 
   public VirtualFile getAppFile(VirtualFile currentFile) {
     String appDirPath = null;
-    Pattern pattern = Pattern.compile("(.*?/app).*?");
+    Pattern pattern = Pattern.compile("(.*?/(app|src|tests)).*?");
     Matcher matcher = pattern.matcher(currentFile.toString());
 
     if (matcher.find()) {
-      appDirPath = matcher.group(1);
+      appDirPath = matcher.group(1).replaceAll("(.*?)/(src|tests)$", "$1");
     } else {
       return null;
     }

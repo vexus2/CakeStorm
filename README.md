@@ -24,6 +24,9 @@ It provides the ability to easily jump between files.
 6. Save the settings and restart the IDE
 
 ## What's New
+### Version 0.6.0
+- CakePHP3 Support.
+
 ### Version 0.5.3
 - Fixed bug.
 
@@ -94,3 +97,11 @@ Default Keybind is "Ctrl+b"
 - I found a bug. What should I do?
 
 Please open an [issue](https://github.com/nanapi/cake-storm/issues) or fix it and send a pull request. :grin:
+
+- .ctp file is not performed Syntax Highligh
+
+It doesn't support it in the plugin.
+Go to  [Preferences] -> [Editor] -> [File Types] -> [PHP]  and add `*.ctp`.
+![readme](https://github.com/vexus2/cake-storm/raw/master/images/readme1.gif)
+
+

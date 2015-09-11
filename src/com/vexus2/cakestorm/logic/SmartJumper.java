@@ -3,11 +3,11 @@ package com.vexus2.cakestorm.logic;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.vexus2.cakestorm.lib.CakeIdentifier;
 import com.vexus2.cakestorm.lib.FileSystem;
 import com.vexus2.cakestorm.lib.OpenType;
+import com.vexus2.cakestorm.lib.PhpElementsUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -25,11 +25,13 @@ public class SmartJumper extends Jumper {
   public SmartJumper(AnActionEvent e, OpenType openType) throws Exception {
     super(e, openType);
     if (this.fileSystem.getIdentifier() == CakeIdentifier.Controller) {
-      PhpClass phpClass = PsiTreeUtil.getChildOfType(psiFile.getFirstChild(), PhpClass.class);
+      PhpClass phpClass = PhpElementsUtil.getFirstClassFromFile(psiFile);
+
       if (phpClass != null) {
         this.controllerMethod = new ControllerMethod(phpClass, editor.getCaretModel().getOffset());
       }
-    } else if (this.fileSystem.getIdentifier() == CakeIdentifier.View) {
+    } else if (this.fileSystem.getIdentifier() == CakeIdentifier.View
+        || this.fileSystem.getIdentifier() == CakeIdentifier.Template) {
       this.viewMethod = new ViewMethod(psiFile);
     }
   }
@@ -48,47 +50,49 @@ public class SmartJumper extends Jumper {
       VirtualFile virtualFile = fileSystem.getVirtualFile(identifier);
       if (virtualFile != null) {
         group.addSeparator(identifier.toString());
-        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppFile(virtualFile).getPath().toString(), ""), virtualFile);
+        fileSystem.addGroupChild(group, virtualFile.getPath().replaceAll(fileSystem.getAppFile(virtualFile).getPath(), ""), virtualFile);
       }
     }
     fileSystem.showPopup(group);
   }
 
+  // ViewからController, Elementなどジャンプ対象のファイルを追加
   private void addViewGroups(DefaultActionGroup group) {
-    if (viewMethod != null) {
-      // view -> controller
-      Map<CakeIdentifier, String> cakeVersionAbsorption = fileSystem.getDirectorySystem().getCakeConfig().cakeVersionAbsorption;
-      Pattern pattern = Pattern.compile(fileSystem.getDirectorySystem().getCanonicalAppPath()
-          + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
-          + cakeVersionAbsorption.get(CakeIdentifier.View)
-          + "(.*?)/");
-      Matcher matcher = pattern.matcher(fileSystem.getCurrentFile().getPath());
-      String path = "";
+    if(viewMethod == null) return;
+    // view -> controller
+    Map<CakeIdentifier, String> cakeVersionAbsorption = fileSystem.getDirectorySystem().getCakeConfig().cakeVersionAbsorption;
+    String identifier = (fileSystem.getDirectorySystem().getCakeConfig().cakeVersion == 3) ? cakeVersionAbsorption.get(CakeIdentifier.Template) : cakeVersionAbsorption.get(CakeIdentifier.View);
+    Pattern pattern = Pattern.compile(fileSystem.getDirectorySystem().getCanonicalAppPath()
+        + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
+        + identifier
+        + "(.*?)/");
+    Matcher matcher = pattern.matcher(fileSystem.getCurrentFile().getPath());
+    String path = "";
 
-      if (matcher.find()) {
-        path = directorySystem.getCakeConfig().convertControllerName(matcher.group(1));
-      }
-
-      VirtualFile virtualFile = fileSystem.virtualFileBy(directorySystem.getAppPath().toString()
-          + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
-          + cakeVersionAbsorption.get(CakeIdentifier.Controller)
-          + path
-          + FileSystem.FILE_EXTENSION_PHP);
-      if (virtualFile != null) {
-        group.addSeparator(CakeIdentifier.Controller.toString());
-        fileSystem.addGroupChild(group, virtualFile.getPath().toString().replaceAll(fileSystem.getAppFile(virtualFile).getPath().toString(), ""), virtualFile);
-      }
-
-      // view -> element
-      List<String> renderElements = viewMethod.getRenderElements();
-
-      fileSystem.createViewPopupActions(renderElements,
-          group,
-          directorySystem.getCakeConfig().cakeVersionAbsorption.get(CakeIdentifier.Element),
-          CakeIdentifier.Element.toString());
+    if (matcher.find()) {
+      path = directorySystem.getCakeConfig().convertControllerName(matcher.group(1));
     }
+
+    VirtualFile virtualFile = fileSystem.virtualFileBy(directorySystem.getAppPath().toString()
+        + ((this.fileSystem.getPluginDir() != null) ? "/" + cakeVersionAbsorption.get(CakeIdentifier.Plugin) + this.fileSystem.getPluginDir() : "")
+        + cakeVersionAbsorption.get(CakeIdentifier.Controller)
+        + path
+        + FileSystem.FILE_EXTENSION_PHP);
+    if (virtualFile != null) {
+      group.addSeparator(CakeIdentifier.Controller.toString());
+      fileSystem.addGroupChild(group, virtualFile.getPath().replaceAll(fileSystem.getAppFile(virtualFile).getPath(), ""), virtualFile);
+    }
+
+    // view -> element
+    List<String> renderElements = viewMethod.getRenderElements();
+
+    fileSystem.createViewPopupActions(renderElements,
+        group,
+        directorySystem.getCakeConfig().cakeVersionAbsorption.get(CakeIdentifier.Element),
+        CakeIdentifier.Element.toString());
   }
 
+  // ControllerからView, Testなどジャンプ対象のファイルを追加
   private void addControllerGroups(DefaultActionGroup group) {
     if (controllerMethod != null) {
       Map<String, Function> currentActions = controllerMethod.getActions();
