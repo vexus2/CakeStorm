@@ -10,8 +10,8 @@ CakeStormは[PhpStorm](http://www.jetbrains.com/phpstorm/)の[CakePHP](http://ww
 ![movie](https://github.com/vexus2/cake-storm/raw/master/images/presentation3.gif)
 
 ## 動作環境
-- PhpStorm 6.0.0+ or IntelliJ Idea 12.0+(PHP Plugin必須)
-- CakePHP 1.3+ or 2.x+
+- PhpStorm 8.0.0+ or IntelliJ Idea 14.0+(PHP Plugin必須)
+- CakePHP 1.3+ or 2.x+ or 3.x+
 
 ## インストール
 1. 設定メニューから[IDE Settings]-[Plugins]を表示
@@ -100,4 +100,4 @@ PhpStormのデフォルト機能、"Go to Decralation"で移動出来ます。
 
 - Viewファイル(.ctp)がコードハイライトされない
 プラグインの機能ではサポートしていません。[Preferences] -> [Editor] -> [File Types] -> [PHP] から `*.ctp` を追加することでPHPファイルとして認識されます。
-![readme](https://github.com/vexus2/cake-storm/raw/master/images/readme1.gif)
+![readme](https://raw.githubusercontent.com/vexus2/CakeStorm/master/images/readme1.png)

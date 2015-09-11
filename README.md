@@ -12,8 +12,8 @@ It provides the ability to easily jump between files.
 ![movie](https://github.com/nanapi/cake-storm/raw/master/images/presentation3.gif)
 
 ## Requirements
-- PhpStorm 6.0.0+ or IntelliJ Idea 12.0+ with PHP Plugin
-- CakePHP 1.3+ or 2.x+
+- PhpStorm 8.0.0+ or IntelliJ Idea 14.0+ with PHP Plugin
+- CakePHP 1.3+ or 2.x+ or 3.x+
 
 ## Installation
 1. Go to File > Settings
@@ -102,6 +102,5 @@ Please open an [issue](https://github.com/nanapi/cake-storm/issues) or fix it an
 
 It doesn't support it in the plugin.
 Go to  [Preferences] -> [Editor] -> [File Types] -> [PHP]  and add `*.ctp`.
-![readme](https://github.com/vexus2/cake-storm/raw/master/images/readme1.gif)
-
+![readme](https://raw.githubusercontent.com/vexus2/CakeStorm/master/images/readme1.png)
 
